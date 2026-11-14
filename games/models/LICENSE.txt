@@ -1,0 +1,4 @@
+3D models in this folder: Kenney.nl (www.kenney.nl) — Car Kit, City Kit Commercial, City Kit Suburban, Mini Characters.
+License: Creative Commons Zero (CC0) — free for personal and commercial use, no attribution required.
+
+Characters (models/meshy/*.glb): Roxy Rush, Tony "Candles" Vega, Officer Dumpski — generated with Meshy AI from original prompts, Meshy free plan, CC BY 4.0. Credit: "Created with Meshy AI".
