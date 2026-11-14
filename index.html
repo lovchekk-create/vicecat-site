@@ -366,7 +366,8 @@ section{position:relative;overflow-x:clip;padding:clamp(80px,11vw,150px) 0}
 .arena h3{font-size:clamp(20px,2.4vw,28px);font-weight:900;margin-bottom:6px}
 .arena>p{color:var(--mute);font-size:15px}
 #st2{display:flex;justify-content:center;gap:6px;margin:16px 0 6px;font-size:26px;color:rgba(244,236,255,.14)}
-#st2 b.on{color:var(--gold);text-shadow:0 0 14px var(--orange)}
+#st2 b.on{color:var(--gold);filter:drop-shadow(0 0 8px var(--orange));animation:icstar 2.4s ease-in-out infinite}
+#st2 b{display:inline-flex;transition:color .3s,transform .4s cubic-bezier(.2,1.8,.4,1)}#st2 b .ic{width:28px;height:28px}
 #cat{width:150px;height:150px;border-radius:50%;border:0;cursor:pointer;font-size:78px;line-height:1;margin:10px auto 6px;display:grid;place-items:center;
   background:radial-gradient(circle at 35% 30%,#ff8fc4,#ff2e88 45%,#7a1b8f);box-shadow:0 0 0 6px rgba(255,46,136,.18),0 20px 60px -10px var(--pink);transition:transform .12s}
 #cat:active{transform:scale(.93)}
@@ -420,7 +421,7 @@ section{position:relative;overflow-x:clip;padding:clamp(80px,11vw,150px) 0}
 .leg i{display:block;height:4px;border-radius:4px;background:rgba(244,236,255,.08);overflow:hidden}
 .leg i::after{content:"";display:block;height:100%;width:var(--w,0%);background:var(--c);transition:width 1.4s var(--ease)}
 .c-chip{grid-column:span 4;display:flex;align-items:center;gap:16px}
-.c-chip .ic{flex:none;width:52px;height:52px;border-radius:14px;display:grid;place-items:center;font-size:22px;background:rgba(33,230,242,.1);box-shadow:inset 0 0 0 1px rgba(33,230,242,.35),0 0 24px -8px var(--cyan)}
+
 .c-chip b{display:block;font:800 20px/1.1 var(--disp)}
 .c-chip small{display:block;font:500 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-top:6px}
 
@@ -458,6 +459,324 @@ footer small{display:block;color:var(--dim);font-size:13px;line-height:1.6;max-w
 
 .toast{position:fixed;left:50%;bottom:24px;z-index:160;transform:translate(-50%,30px);opacity:0;padding:12px 18px;border-radius:12px;background:#1a0b36;box-shadow:inset 0 0 0 1px rgba(33,230,242,.5),0 20px 40px -10px #000;font:600 14px var(--body);transition:.35s var(--ease);pointer-events:none}
 .toast.on{opacity:1;transform:translate(-50%,0)}
+
+/* ================= VICE CAT ICON SYSTEM ================= */
+.ic{width:1.15em;height:1.15em;flex:none;display:inline-block;vertical-align:-.2em;--ia:var(--pink);overflow:visible}
+.ic .f{fill:currentColor;stroke:none}
+.ic .a{fill:var(--ia);stroke:var(--ia)}
+.ic [stroke="none"].a{stroke:none}
+.ic g,.ic path,.ic circle,.ic ellipse,.ic rect{transform-box:fill-box;transform-origin:center}
+[data-ic]{display:inline-flex;align-items:center;gap:.5em}
+/* cat: glint + ear twitch */
+.ic-cat .glint{opacity:0;animation:icglint 6s infinite}
+@keyframes icglint{0%,86%,100%{opacity:0}90%{opacity:1}}
+.hv:hover .ic-cat .ears,.ic-cat.tw .ears{animation:ictw .45s}
+@keyframes ictw{30%{transform:translateY(-1px) scaleY(1.12)}60%{transform:scaleY(.94)}}
+/* cat face: blink */
+.ic-catface .eyes{animation:icblink 4.6s infinite}
+@keyframes icblink{0%,93%,100%{transform:scaleY(1)}95%{transform:scaleY(.08)}}
+/* stars */
+.wanted{display:flex;gap:3px}
+.wanted b{display:inline-flex;color:rgba(244,236,255,.16);transition:color .3s,transform .4s cubic-bezier(.2,1.8,.4,1),filter .3s}
+.wanted b .ic{width:15px;height:15px}
+.wanted b.on{color:var(--gold);filter:drop-shadow(0 0 5px rgba(255,138,61,.8));animation:icstar 2.6s ease-in-out infinite}
+.wanted b:nth-child(2){transition-delay:.06s;animation-delay:.2s}.wanted b:nth-child(3){transition-delay:.12s;animation-delay:.4s}.wanted b:nth-child(4){transition-delay:.18s;animation-delay:.6s}.wanted b:nth-child(5){transition-delay:.24s;animation-delay:.8s}
+@keyframes icstar{50%{transform:scale(1.14);filter:drop-shadow(0 0 9px rgba(255,138,61,1))}}
+.wanted:hover b{filter:drop-shadow(0 0 6px rgba(255,200,87,.6))}
+.wanted.mini b .ic{width:12px;height:12px}
+.wanted.mini b{color:var(--gold)}
+/* radar */
+.ic-radar .sweep{transform-origin:0% 100%;transform-box:fill-box;animation:icspin 2.6s linear infinite}
+.ic-radar .sweep{transform-origin:12px 12px;transform-box:view-box}
+.ic-radar .blip{animation:icblip 2.6s infinite}
+@keyframes icspin{to{transform:rotate(360deg)}}
+@keyframes icblip{0%,30%{opacity:0}38%{opacity:1}80%,100%{opacity:.1}}
+/* gps */
+.ic-gps .ring{animation:icring 2.2s ease-out infinite;opacity:0}
+@keyframes icring{0%{transform:scale(.3);opacity:.9}100%{transform:scale(1.25);opacity:0}}
+.ic-gps .dot{animation:icdot 1.1s ease-in-out infinite alternate}
+@keyframes icdot{to{transform:scale(.6)}}
+/* radio */
+.ic-radio .wv{opacity:.15}
+.on .ic-radio .wv,.hv:hover .ic-radio .wv{animation:icwave 1s infinite}
+.on .ic-radio .w2,.hv:hover .ic-radio .w2{animation-delay:.25s}
+.on .ic-radio .dial{animation:icspin 3s linear infinite}
+.hv:hover .ic-radio .dial{transform:rotate(60deg);transition:transform .4s}
+@keyframes icwave{0%,100%{opacity:.15}40%{opacity:1}}
+.ic-sound .wv{animation:icwave 1.1s infinite}.ic-sound .w2{animation-delay:.25s}
+/* controller + arcade leds */
+.ic-controller .led{animation:icled 1.4s steps(2) infinite}
+.ic-controller .l2{animation-delay:.7s}
+.ic-arcade .led{animation:icled 1s steps(2) infinite}
+.ic-arcade .scr{animation:icscr 3s infinite}
+@keyframes icled{50%{opacity:.25}}
+@keyframes icscr{0%,92%,100%{opacity:1}95%{opacity:.4}}
+.hv:hover .ic-controller,.btn:hover .ic-controller{animation:icwig .5s}
+@keyframes icwig{25%{transform:rotate(-8deg)}75%{transform:rotate(6deg)}}
+/* car */
+.ic-car .speed{opacity:0;transition:opacity .3s,transform .3s}
+.ic-car .hl{stroke:var(--gold);transition:filter .3s}
+:is(.hv,.btn,.more):hover .ic-car .wheel,.ic-car.drive .wheel{animation:icspin .5s linear infinite}
+:is(.hv,.btn,.more):hover .ic-car .speed,.ic-car.drive .speed{opacity:1;transform:translateX(-1px)}
+:is(.hv,.btn,.more):hover .ic-car .hl{filter:drop-shadow(0 0 3px #ffc857) drop-shadow(0 0 6px #ffc857)}
+/* coin */
+:is(.hv,.btn):hover .ic-coin .spin,.ic-coin.flip .spin{animation:icflip .8s cubic-bezier(.4,0,.2,1)}
+@keyframes icflip{to{transform:rotateY(360deg)}}
+/* signal */
+.ic-signal .sb{opacity:.25}
+.ic-signal.live .sb{animation:icsig 1.8s infinite}
+.ic-signal.live .s2{animation-delay:.15s}.ic-signal.live .s3{animation-delay:.3s}.ic-signal.live .s4{animation-delay:.45s}
+@keyframes icsig{0%,15%{opacity:.25}30%,80%{opacity:1}100%{opacity:.25}}
+/* misc */
+.ic-flame .core{animation:icflk .35s ease-in-out infinite alternate}
+@keyframes icflk{to{transform:scale(.86,1.08) translateY(-.4px)}}
+.ic-terminal .cursor{animation:icled .9s steps(2) infinite}
+.hv:hover .ic-lock .shackle{transform:translateY(-2px);transition:transform .3s}
+.ic-lock .shackle{transition:transform .3s}
+.hv:hover .ic-paw .toe,.ic-paw.hop .toe{animation:ictoe .5s}
+@keyframes ictoe{40%{transform:translateY(-1.4px)}}
+.ic-gem .shine{animation:icled 2.2s infinite}
+.ic-chart .line{stroke-dasharray:20;stroke-dashoffset:0}
+.hv:hover .ic-chart .line,.in .ic-chart .line{animation:icdraw 1.2s cubic-bezier(.6,0,.2,1)}
+@keyframes icdraw{from{stroke-dashoffset:20}}
+.ic-city .blink{animation:icled 1.6s steps(2) infinite}
+.btn:hover .ic-arrow{transform:translateX(3px)}.ic-arrow{transition:transform .3s}
+
+/* ================= BUTTONS: sweep, animated border, ripple ================= */
+.btn{overflow:hidden}
+.btn .ic{width:18px;height:18px}
+.btn::after{content:"";position:absolute;inset:-2px;z-index:-1;background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.5) 48%,rgba(255,255,255,.12) 54%,transparent 66%);transform:translateX(-130%);transition:transform .8s cubic-bezier(.2,.8,.2,1);pointer-events:none}
+.btn:hover::after{transform:translateX(130%)}
+.btn.pri{background-size:200% 100%;background-image:linear-gradient(90deg,#ff2e88,#ff8a3d 35%,#ffc857 60%,#ff8a3d 80%,#ff2e88);transition:transform .25s var(--ease),box-shadow .25s var(--ease),background-position .8s}
+.btn.pri:hover{background-position:100% 0}
+@property --ang{syntax:"<angle>";inherits:false;initial-value:0deg}
+.btn.sec::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;background:conic-gradient(from var(--ang),transparent 0 55%,var(--cyan) 70%,#fff 75%,var(--pink) 82%,transparent 95%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .3s}
+.btn.sec:hover::before{opacity:1;animation:icang 2.2s linear infinite}
+@keyframes icang{to{--ang:360deg}}
+.btn:active{transform:translateY(1px) scale(.97)!important}
+.rp{position:absolute;border-radius:50%;pointer-events:none;width:12px;height:12px;margin:-6px 0 0 -6px;background:rgba(255,255,255,.55);animation:rp .6s ease-out forwards;z-index:0}
+@keyframes rp{to{transform:scale(22);opacity:0}}
+.btn.lg{--h:56px;padding:0 28px}
+
+/* ================= NAV ================= */
+.logo .mk{color:#1a0618;--ia:#1a0618;font-size:20px}
+.logo .mk .ic{width:22px;height:22px}
+#snd{color:var(--mute);transition:color .2s,background .2s}
+#snd .ic{width:22px;height:22px}
+#snd.on{color:var(--cyan);background:rgba(33,230,242,.1)}
+#snd.on .ic{--ia:var(--cyan)}
+#mnav a.l i{display:inline-flex;margin-right:14px;color:var(--cyan)}
+#mnav a.l i .ic{width:24px;height:24px}
+#mnav a.l{justify-content:flex-start}
+#mnav a.l span{margin-left:auto}
+
+/* ================= HERO ================= */
+.eyebrow b .ic{width:13px;height:13px}
+.eyebrow b::before{display:none}
+.beams{position:absolute;left:50%;bottom:26vh;width:0;height:0;z-index:-1;pointer-events:none}
+.beams i{position:absolute;left:0;bottom:0;width:3px;height:120vh;transform-origin:50% 100%;background:linear-gradient(0deg,rgba(33,230,242,.22),transparent 80%);filter:blur(2px);animation:beam 9s ease-in-out infinite alternate}
+.beams i:last-child{background:linear-gradient(0deg,rgba(255,46,136,.22),transparent 80%);animation-duration:11s;animation-delay:-4s}
+@keyframes beam{from{transform:rotate(-28deg)}to{transform:rotate(26deg)}}
+.tinfo b .ic{width:15px;height:15px}
+.tinfo .ok .ic{--ia:var(--cyan)}
+.tinfo button{display:inline-grid;place-items:center;padding:5px}
+.tinfo button .ic{width:14px;height:14px}
+.sticker [data-ic] .ic{width:14px;height:14px;vertical-align:-3px}
+.sticker [data-ic]{gap:0;margin-right:6px}
+.tag small [data-ic]{gap:0;margin-right:6px}
+.tag small .ic{width:13px;height:13px;vertical-align:-2px}
+.hero-art .frame{transform:perspective(900px) rotateY(calc(var(--mx,0)*-5deg)) rotateX(calc(var(--my,0)*4deg));transition:transform .4s var(--ease)}
+.hudmap{position:absolute;right:max(calc((100vw - 1240px)/2),clamp(18px,4vw,48px));bottom:22px;display:flex;align-items:center;gap:12px;padding:10px 14px 10px 10px;border-radius:14px;background:rgba(10,5,24,.6);backdrop-filter:blur(10px);box-shadow:inset 0 0 0 1px rgba(33,230,242,.25);color:var(--haze);transition:transform .3s var(--ease),box-shadow .3s;z-index:2}
+.hudmap:hover{transform:translateY(-2px);box-shadow:inset 0 0 0 1px rgba(33,230,242,.6),0 0 30px -10px var(--cyan)}
+.hudmap .rd .ic{width:34px;height:34px;color:var(--cyan);--ia:var(--cyan)}
+.hudmap small{display:block;font:600 10px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);margin-bottom:5px}
+.hudmap b{font:800 14px/1 var(--disp)}
+.hudmap>[data-ic]:last-child .ic{width:16px;height:16px;color:var(--dim)}
+
+/* ================= HEADINGS: animated typography ================= */
+.sw{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-bottom:-.08em}
+.sw>span{display:inline-block;transform:translateY(105%);transition:transform 1s cubic-bezier(.16,1,.3,1)}
+.in .sw>span,.sw.in>span{transform:none}
+.head h2 .grad,.head h2 .gradc,.h2 .grad{display:inline-block}
+.in .grad.flick,.in .gradc.flick{animation:flick 1.2s steps(1) .5s both}
+@keyframes flick{0%{opacity:.15}10%{opacity:1}14%{opacity:.3}22%{opacity:1}30%{opacity:.5}36%,100%{opacity:1}}
+.kick{opacity:0;transform:translateX(-12px);transition:opacity .6s,transform .8s var(--ease)}
+.in .kick,.kick.in{opacity:1;transform:none}
+.kick::before{transform-origin:0 50%;transform:scaleX(0);transition:transform .8s .2s var(--ease)}
+.in .kick::before,.kick.in::before{transform:scaleX(1)}
+
+/* ================= SEPARATORS (each with its own personality) ================= */
+.sep{position:relative;height:56px;width:var(--wrap);margin:0 auto;overflow:hidden;color:var(--cyan)}
+.sep .ln{position:absolute;left:0;right:0;top:50%;height:1px;background:linear-gradient(90deg,transparent,rgba(244,236,255,.18),transparent)}
+.sep.road .ln{background:repeating-linear-gradient(90deg,rgba(255,200,87,.5) 0 18px,transparent 18px 34px);height:2px;-webkit-mask:linear-gradient(90deg,transparent,#000 15%,#000 85%,transparent);mask:linear-gradient(90deg,transparent,#000 15%,#000 85%,transparent)}
+.sep.road .rider{position:absolute;top:50%;left:0;margin-top:-17px;color:var(--pink)}
+.sep.road .rider .ic{width:34px;height:34px}
+.sep.road.in .rider{animation:ride 3.2s cubic-bezier(.5,0,.3,1) both}
+@keyframes ride{from{transform:translateX(-60px)}to{transform:translateX(calc(min(1240px,100vw - 36px) + 20px))}}
+.sep.paws{display:flex;justify-content:center;align-items:center;gap:22px}
+.sep.paws span{color:var(--pink);opacity:0;transform:rotate(90deg) scale(.6)}
+.sep.paws span:nth-child(even){translate:0 10px}
+.sep.paws span .ic{width:16px;height:16px}
+.sep.paws.in span{animation:pawstep .5s calc(var(--i)*.16s) forwards}
+@keyframes pawstep{to{opacity:.7;transform:rotate(90deg) scale(1)}}
+.sep.ping span{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);color:var(--gold);background:var(--ink);padding:0 14px}
+.sep.ping span .ic{width:26px;height:26px;--ia:var(--gold)}
+.sep.ping .ln{transform:scaleX(0);transition:transform 1.2s var(--ease)}
+.sep.ping.in .ln{transform:scaleX(1)}
+.sep.ping.in .ic-coin .spin{animation:icflip 1s .4s}
+
+/* ================= STORY ================= */
+.mtag{display:inline-flex;align-items:center;gap:8px}
+.mtag i{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:9px;background:rgba(6,3,14,.6);backdrop-filter:blur(6px);color:var(--haze);box-shadow:inset 0 0 0 1px var(--line2)}
+.mtag i .ic{width:16px;height:16px}
+.st [data-ic]{gap:0}.st .ic{width:12px;height:12px}
+.st::before{display:none}
+.st.prog .ic{--ia:var(--gold)}
+.mis.locked .in::after{content:none}
+.mis{--px:50%;--py:50%}
+.mis .spot{position:absolute;inset:0;pointer-events:none;background:radial-gradient(420px circle at var(--px) var(--py),rgba(255,255,255,.12),transparent 50%);opacity:0;transition:opacity .4s;z-index:1}
+.mis:hover .spot{opacity:1}
+.mis.cur{box-shadow:inset 0 0 0 1.5px rgba(255,46,136,.6),0 30px 60px -30px #000}
+.chap{width:var(--wrap);margin:26px auto 0;display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.chap button{position:relative;display:flex;align-items:center;gap:10px;padding:10px 12px 14px;border:0;border-radius:12px;background:rgba(244,236,255,.03);box-shadow:inset 0 0 0 1px var(--line);cursor:pointer;color:var(--dim);font:600 12px var(--mono);letter-spacing:.12em;text-align:left;transition:background .3s,color .3s,box-shadow .3s}
+.chap button:hover{color:var(--haze);background:rgba(244,236,255,.07)}
+.chap button .ci .ic{width:18px;height:18px}
+.chap button b{position:absolute;left:12px;right:12px;bottom:6px;height:2px;border-radius:2px;background:rgba(244,236,255,.1);overflow:hidden}
+.chap button b::after{content:"";position:absolute;inset:0;background:var(--neon);transform-origin:0 50%;transform:scaleX(var(--p,0));box-shadow:0 0 8px var(--pink)}
+.chap button.cur{color:var(--haze);background:rgba(255,46,136,.08);box-shadow:inset 0 0 0 1px rgba(255,46,136,.45)}
+.chap button.cur .ci{color:var(--pink)}
+.chap button.cur .ci .ic{animation:icstar 1.6s infinite}
+
+/* ================= CREW ================= */
+.cc .bdg{position:absolute;top:14px;left:14px;display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:rgba(6,3,14,.65);backdrop-filter:blur(6px);box-shadow:inset 0 0 0 1px var(--line2);color:var(--haze);transition:transform .5s var(--ease),background .4s,color .4s}
+.cc .bdg .ic{width:22px;height:22px}
+.cc.on .bdg{background:var(--pink);color:#1a0618;--ia:#1a0618;transform:rotate(-8deg) scale(1.08)}
+.cc .num{left:64px;top:28px}
+.cc .p1 [data-ic]{gap:0;margin-right:6px}.cc .p1 .ic{width:12px;height:12px;vertical-align:-2px}
+.cc::after{content:"";position:absolute;left:0;right:0;top:-40%;height:40%;background:linear-gradient(180deg,transparent,rgba(33,230,242,.18),transparent);pointer-events:none;opacity:0}
+.cc.on.scan::after{animation:scan .9s cubic-bezier(.6,0,.4,1)}
+@keyframes scan{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(360%)}}
+.stat{grid-template-columns:18px 62px 1fr 40px}
+.stat .ic{width:15px;height:15px;color:var(--mute)}
+.stat em{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.crewhint span{display:inline-flex;align-items:center;gap:8px}
+.crewhint .ic{width:16px;height:16px;color:var(--cyan)}
+
+/* ================= MAP ================= */
+.mv .radar{position:absolute;inset:-30%;z-index:2;pointer-events:none;background:conic-gradient(from 0deg,rgba(33,230,242,.16),transparent 18%);border-radius:50%;animation:icspin 7s linear infinite;mix-blend-mode:screen;opacity:.7}
+.mv::after{display:none}
+.hud .g{display:inline-flex;align-items:center;gap:6px}
+.hud .g .ic{width:14px;height:14px;--ia:var(--cyan)}
+#coord{font-variant-numeric:tabular-nums;color:var(--haze)}
+.zoomc{position:absolute;z-index:3;right:14px;top:14px;display:flex;flex-direction:column;gap:6px}
+.zoomc button{width:36px;height:36px;display:grid;place-items:center;border:0;border-radius:10px;background:rgba(6,3,14,.72);backdrop-filter:blur(6px);color:var(--haze);box-shadow:inset 0 0 0 1px var(--line2);cursor:pointer;transition:background .2s,color .2s}
+.zoomc button:hover{background:rgba(33,230,242,.18);color:var(--cyan)}
+.zoomc .ic{width:16px;height:16px;--ia:var(--cyan)}
+.found{position:absolute;z-index:3;left:14px;bottom:14px;display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;background:rgba(6,3,14,.72);backdrop-filter:blur(6px);box-shadow:inset 0 0 0 1px var(--line2);font:600 12px var(--mono);letter-spacing:.06em;color:var(--mute)}
+.found b{color:var(--haze);font-variant-numeric:tabular-nums}
+.found .ic{width:16px;height:16px;color:var(--cyan)}
+.found.pop{animation:fpop .5s}
+@keyframes fpop{40%{transform:scale(1.12)}}
+.pn{width:34px;height:34px;margin:-17px 0 0 -17px;color:#06030e}
+.pn::before{inset:3px;border-radius:50%;transform:none;background:var(--c);box-shadow:0 0 0 2px #06030e,0 0 0 3.5px var(--c),0 0 18px var(--c)}
+.pn .pi{position:absolute;inset:0;display:grid;place-items:center;z-index:1}
+.pn .pi .ic{width:16px;height:16px;--ia:#06030e}
+.pn.a::before{background:#fff}
+.pn.a{z-index:4}
+.pn .lb{bottom:calc(100% + 10px)}
+.plist button i{color:#06030e;--ia:#06030e}
+.plist button i .ic{width:16px;height:16px}
+.plist button .vis{margin-left:auto;color:var(--cyan);opacity:0;transition:opacity .3s}
+.plist button.seen .vis{opacity:1}
+.plist button .vis .ic{width:14px;height:14px}
+.plist button span::after{content:none}
+#mi small{display:flex;align-items:center;gap:8px}
+#mi small .ic{width:14px;height:14px}
+.ach{position:fixed;z-index:170;left:50%;top:88px;transform:translate(-50%,-30px);opacity:0;display:flex;align-items:center;gap:14px;padding:12px 18px 12px 12px;border-radius:16px;background:rgba(20,10,40,.92);backdrop-filter:blur(10px);box-shadow:inset 0 0 0 1px rgba(255,200,87,.5),0 20px 50px -10px #000,0 0 40px -10px var(--gold);transition:.5s var(--ease);pointer-events:none}
+.ach.on{opacity:1;transform:translate(-50%,0)}
+.ach .ai{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:var(--gold);color:#1a0618;--ia:#1a0618}
+.ach .ai .ic{width:26px;height:26px}
+.ach small{display:block;font:600 10px var(--mono);letter-spacing:.18em;color:var(--gold);text-transform:uppercase;margin-bottom:4px}
+.ach b{font:800 16px var(--disp)}
+
+/* ================= GAMES ================= */
+.cab .mar .led{color:var(--mute)}
+.cab .mar .led .ic{width:16px;height:16px}
+.cab .mar .hi{font-family:var(--mono)}
+.cab .mar .hi em{font-style:normal;color:var(--gold);font-variant-numeric:tabular-nums;text-shadow:0 0 8px rgba(255,200,87,.6)}
+#cat{color:#1a0618;--ia:#1a0618;font-size:0}
+#cat .ic{width:96px;height:96px;transition:transform .15s}
+#cat:active .ic{transform:scale(.9)}
+#cat.flash .ic-catface .ears{animation:ictw .35s}
+.coin [data-ic]{gap:0;margin-right:8px}.coin .ic{width:14px;height:14px;vertical-align:-2px;--ia:var(--gold)}
+.paw{font-size:0;color:var(--pink)}
+.paw .ic{width:22px;height:22px}
+.more .badge span{display:inline-flex;align-items:center;gap:6px}
+.more .badge .ic{width:15px;height:15px}
+.more .badge span:first-child .ic{--ia:#06030e}
+.more.launch .ph{transform:scale(1.25);filter:brightness(1.5) blur(2px);transition:transform .6s cubic-bezier(.7,0,.6,1),filter .5s}
+.more.launch::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,240,220,.85) 50%,transparent 70%);animation:launch .55s cubic-bezier(.7,0,.3,1) forwards;z-index:3}
+@keyframes launch{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+
+/* ================= TOKENOMICS ================= */
+.card .lbl span{display:inline-flex;align-items:center;gap:8px}
+.card .lbl .ic{width:16px;height:16px;color:var(--gold);--ia:var(--gold)}
+.digits{font:700 clamp(14px,1.5vw,18px)/1 var(--mono);letter-spacing:.08em;color:var(--cyan);font-variant-numeric:tabular-nums;margin-bottom:10px;text-shadow:0 0 12px rgba(33,230,242,.45)}
+.c-chip .cic{flex:none;width:52px;height:52px;border-radius:14px;display:grid;place-items:center;color:var(--cyan);--ia:var(--pink);background:rgba(33,230,242,.08);box-shadow:inset 0 0 0 1px rgba(33,230,242,.3)}
+.c-chip .cic .ic{width:26px;height:26px}
+.leg div{grid-template-columns:auto 1fr auto}
+.leg .li{grid-row:span 2;color:var(--c);display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:rgba(244,236,255,.05);--ia:var(--c)}
+.leg .li .ic{width:18px;height:18px}
+.leg b{grid-row:span 2;grid-column:3;text-align:right}
+.leg div>span:not(.li){grid-column:2;grid-row:1}.leg div>i{grid-column:2;grid-row:2}.leg .li{grid-column:1;grid-row:1/3}.leg b{grid-row:1/3!important}
+.card{--px:50%;--py:50%}
+.card::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(360px circle at var(--px) var(--py),rgba(255,255,255,.07),transparent 55%);opacity:0;transition:opacity .4s}
+.card:hover::before{opacity:1}
+
+/* ================= BUY ================= */
+.steps li{padding-top:22px}
+.steps .sic{display:grid;place-items:center;width:46px;height:46px;border-radius:13px;margin-bottom:16px;color:var(--cyan);background:rgba(33,230,242,.07);box-shadow:inset 0 0 0 1px rgba(33,230,242,.25);transition:transform .4s var(--ease),background .3s}
+.steps .sic .ic{width:24px;height:24px}
+.steps li:hover .sic{transform:translateY(-3px) rotate(-6deg);background:rgba(255,46,136,.12)}
+.steps li::before{position:absolute;top:22px;right:22px;margin:0}
+.steps li::after{top:45px;left:80px;right:64px;transform-origin:0 50%;transform:scaleX(0);transition:transform 1s .3s var(--ease)}
+.steps li.in::after{transform:scaleX(1)}
+.ca span{display:inline-flex;align-items:center;gap:8px}
+.ca span .ic{width:15px;height:15px;--ia:var(--pink)}
+
+/* ================= COMMUNITY ================= */
+.soc{gap:14px}
+.stile{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;width:min(190px,100%);padding:22px 16px 18px;border-radius:20px;background:rgba(10,5,24,.6);backdrop-filter:blur(8px);box-shadow:inset 0 0 0 1px var(--line2);transition:transform .4s var(--ease),box-shadow .4s,background .3s;overflow:hidden}
+.stile:hover{transform:translateY(-6px);background:rgba(20,8,44,.75);box-shadow:inset 0 0 0 1px rgba(33,230,242,.5),0 20px 40px -20px #000,0 0 40px -14px var(--cyan)}
+.stile .sb{display:grid;place-items:center;width:56px;height:56px;border-radius:16px;background:linear-gradient(160deg,rgba(33,230,242,.18),rgba(255,46,136,.14));color:var(--haze);box-shadow:inset 0 0 0 1px rgba(244,236,255,.18);margin-bottom:6px;transition:transform .5s var(--ease)}
+.stile:hover .sb{transform:rotate(-8deg) scale(1.08)}
+.stile .sb .ic{width:26px;height:26px}
+.stile b{font:800 17px var(--disp)}
+.stile small{font:500 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.stile::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.18) 50%,transparent 65%);transform:translateX(-120%);transition:transform .8s}
+.stile:hover::after{transform:translateX(120%)}
+.fw nav a[data-replay]{display:inline-flex;gap:6px;color:var(--cyan)}
+.fw nav a[data-replay] .ic{width:12px;height:12px}
+
+/* parallax helper */
+[data-par]{will-change:transform}
+
+@media (max-width:960px){.hudmap{display:none}}
+@media (max-width:760px){
+  .chap{grid-template-columns:repeat(5,1fr);gap:6px;width:calc(100% - 36px)}
+  .chap button{padding:8px 0 12px;justify-content:center}.chap .cn{display:none}
+  .chap button b{left:8px;right:8px}
+  .hs-bar{display:none}
+  .stile{width:calc(33.3% - 10px);padding:16px 8px 14px}
+  .stile small{display:none}
+  .stile .sb{width:46px;height:46px}
+  .sep{height:44px}
+  .ach{top:76px;width:calc(100% - 32px)}
+  .zoomc button{width:32px;height:32px}
+  #cat .ic{width:84px;height:84px}
+}
+@media (prefers-reduced-motion:reduce){.beams,.mv .radar{display:none}.sw>span{transform:none}.kick{opacity:1;transform:none}}
 
 /* responsive */
 @media (max-width:1100px){
@@ -527,7 +846,7 @@ footer small{display:block;color:var(--dim);font-size:13px;line-height:1.6;max-w
   <div class="cab" aria-hidden="true"></div>
   <div class="ifog" aria-hidden="true"></div>
   <div class="ihud">
-    <div class="flight"><small>VICE AIR · NIGHT SERVICE</small><b>FLIGHT 1986</b><span>DESCENDING · NEON COAST</span></div>
+    <div class="flight"><small><svg class="ic ic-radar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:14px;height:14px;vertical-align:-3px;margin-right:8px"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5.3" stroke-width="1.2" opacity=".55"/><path d="M12 3v18M3 12h18" stroke-width=".9" opacity=".4"/><path class="sweep a" d="M12 12V3a9 9 0 0 1 7.8 4.5z" stroke="none" opacity=".55"/><circle class="blip" cx="15.6" cy="8.6" r="1.2" stroke="none" fill="currentColor"/></svg>VICE AIR · NIGHT SERVICE</small><b>FLIGHT 1986</b><span>DESCENDING · NEON COAST</span></div>
     <div class="dest" id="dest">Now approaching<b>VICE CITY</b></div>
     <div class="alt">ALTITUDE<b id="altv">35,000 FT</b></div>
   </div>
@@ -540,49 +859,51 @@ footer small{display:block;color:var(--dim);font-size:13px;line-height:1.6;max-w
 </div>
 
 <nav id="nav" aria-label="Main">
-  <a class="logo" href="#hero"><span class="mk" aria-hidden="true">😼</span>$VICECAT</a>
+  <a class="logo hv" href="#hero"><span class="mk" data-ic="cat" aria-hidden="true"></span>$VICECAT</a>
   <div class="links"><a href="#hero">Home</a><a href="#story">Story</a><a href="#crew">The Crew</a><a href="#map">City Map</a><a href="#play">Games</a><a href="#token">Tokenomics</a><a href="#community">Community</a></div>
   <div class="nr">
-    <div id="stars" title="Wanted level rises as you scroll" aria-hidden="true"><b>★</b><b>★</b><b>★</b><b>★</b><b>★</b></div>
-    <button id="snd" aria-label="Turn music on"><span class="eq"><i></i><i></i><i></i><i></i></span></button>
-    <a class="btn pri sm" href="#buy">Buy $VICECAT</a>
+    <div id="stars" class="wanted" title="Wanted level rises as you scroll" aria-hidden="true"><b data-ic="star"></b><b data-ic="star"></b><b data-ic="star"></b><b data-ic="star"></b><b data-ic="star"></b></div>
+    <button id="snd" class="hv" aria-label="Turn music on" title="Synthwave radio" data-ic="radio"></button>
+    <a class="btn pri sm" href="#buy" data-ic="coin">Buy $VICECAT</a>
     <button id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mnav"><i></i><i></i><i></i></button>
   </div>
 </nav>
 <div id="mnav" aria-label="Mobile menu">
-  <a class="l" href="#hero">Home<span>00</span></a><a class="l" href="#story">Story<span>01</span></a><a class="l" href="#crew">The Crew<span>02</span></a><a class="l" href="#map">City Map<span>03</span></a><a class="l" href="#play">Games<span>04</span></a><a class="l" href="#token">Tokenomics<span>05</span></a><a class="l" href="#community">Community<span>06</span></a>
-  <div class="row"><a class="btn pri" href="#buy">Buy $VICECAT</a><a class="btn sec" href="games/index.html" data-games>Play now</a></div>
+  <a class="l" href="#hero"><i data-ic="home"></i>Home<span>00</span></a><a class="l" href="#story"><i data-ic="book"></i>Story<span>01</span></a><a class="l" href="#crew"><i data-ic="select"></i>The Crew<span>02</span></a><a class="l" href="#map"><i data-ic="map"></i>City Map<span>03</span></a><a class="l" href="#play"><i data-ic="arcade"></i>Games<span>04</span></a><a class="l" href="#token"><i data-ic="coin"></i>Tokenomics<span>05</span></a><a class="l" href="#community"><i data-ic="paw"></i>Community<span>06</span></a>
+  <div class="row"><a class="btn pri" href="#buy" data-ic="coin">Buy $VICECAT</a><a class="btn sec" href="games/index.html" data-games data-ic="controller">Play now</a></div>
 </div>
 
 <header id="hero">
   <div class="bgs" aria-hidden="true"><div class="on" data-bg="2"></div><div data-bg="0"></div><div data-bg="1"></div><div data-bg="4"></div><div data-bg="3"></div></div>
   <div class="floor" aria-hidden="true"><i></i></div>
+  <div class="beams" aria-hidden="true"><i></i><i></i></div>
   <div class="hin">
     <div class="hc">
-      <span class="eyebrow fade"><b>Live</b>Nine lives on Solana</span>
+      <span class="eyebrow fade"><b><span data-ic="signal" data-ic-cls="live"></span>Live</b>Nine lives on Solana</span>
       <h1 class="word" aria-label="Vice Cat"><span><i><b>VICE</b></i></span><span><i><b>CAT</b></i></span></h1>
       <p class="lead fade d2">One stray cat. One neon city. <strong>Nine lives on Solana.</strong></p>
       <div class="ctas fade d3">
-        <a class="btn pri" href="#buy">Buy $VICECAT<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <a class="btn sec" href="#play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 5v14l12-7z"/></svg>Play now</a>
+        <a class="btn pri lg" href="#buy" data-ic="coin">Buy $VICECAT<span data-ic="arrow" data-ic-cls="go"></span></a>
+        <a class="btn sec lg" href="#play" data-ic="controller">Play now</a>
       </div>
       <div class="tinfo fade d4">
-        <div><small>Ticker</small><b>$VICECAT</b></div>
-        <div><small>Chain</small><b class="ok">● Solana</b></div>
-        <div><small>Contract</small><b><span class="ca-s" id="ca2">PASTE_CONTRACT_ADDRESS_HERE</span><button id="cp2" aria-label="Copy contract address">Copy</button></b></div>
+        <div><small>Ticker</small><b><span data-ic="coin" data-ic-cls="tk"></span>$VICECAT</b></div>
+        <div><small>Chain</small><b class="ok"><span data-ic="signal" data-ic-cls="live"></span>Solana</b></div>
+        <div><small>Contract</small><b><span class="ca-s" id="ca2">PASTE_CONTRACT_ADDRESS_HERE</span><button id="cp2" aria-label="Copy contract address" title="Copy" data-ic="copy"></button></b></div>
       </div>
     </div>
     <div class="hero-art fade d2">
       <div class="sunr" aria-hidden="true"></div>
       <div class="frame">
         <div class="sl on" data-bg="8"></div><div class="sl" data-bg="6"></div><div class="sl" data-bg="7"></div><div class="sl" data-bg="10"></div><div class="sl" data-bg="9"></div>
-        <div class="tag"><div><small>Now starring</small><b id="hname">Cap Catnip</b></div><em>★★★★★</em></div>
+        <div class="tag"><div><small><span data-ic="select"></span>Now starring</small><b id="hname">Cap Catnip</b></div><em class="wanted mini" aria-hidden="true"><b data-ic="star"></b><b data-ic="star"></b><b data-ic="star"></b><b data-ic="star"></b><b data-ic="star"></b></em></div>
       </div>
-      <div class="sticker" aria-hidden="true"><span>WANTED</span> · 9 LIVES</div>
-      <div class="sticker b" aria-hidden="true"><span>◆</span> 100% SOLANA</div>
+      <div class="sticker" aria-hidden="true"><span data-ic="badge"></span><span>WANTED</span> · 9 LIVES</div>
+      <div class="sticker b" aria-hidden="true"><span data-ic="coin"></span> 100% SOLANA</div>
       <div class="dots" id="dots"></div>
     </div>
   </div>
+  <a class="hudmap hv" href="#map" aria-label="Open the city map"><span class="rd" data-ic="radar"></span><span><small>GPS · Vice Bay</small><b>4 waypoints</b></span><span data-ic="arrow"></span></a>
   <div class="scrollcue" aria-hidden="true">SCROLL<i></i></div>
 </header>
 
@@ -593,31 +914,35 @@ footer small{display:block;color:var(--dim);font-size:13px;line-height:1.6;max-w
     <div class="hs-pin">
       <div class="hs-head"><div><div class="kick">Chapter select</div><h2 class="h2">Story <span class="grad">mode</span></h2></div><p>Five missions from the gutter to the penthouse. Each one is a roadmap goal.</p></div>
       <div class="track" id="track">
-        <article class="mis"><div class="ph" data-bg="2"></div><div class="top"><span>Mission 01</span><span class="st done">Complete</span></div><div class="in"><span class="no">01</span><h3>Stray in Paradise</h3><p>A cat with nothing but a pair of shades steps off the bus in Vice City. The legend starts at the bus stop.</p></div></article>
-        <article class="mis"><div class="ph" data-bg="4"></div><div class="top"><span>Mission 02</span><span class="st done">Complete</span></div><div class="in"><span class="no">02</span><h3>The Solana Docks Job</h3><p>Fast chain, tiny fees, zero excuses. Mittens hacks the night sky and $VICECAT goes live on Solana.</p></div></article>
-        <article class="mis"><div class="ph" data-bg="1"></div><div class="top"><span>Mission 03</span><span class="st prog">In progress</span></div><div class="in"><span class="no">03</span><h3>Wanted: 5 Stars</h3><p>Officer Paws is on the radio. Grow the crew on Telegram and X: every new holder adds a star.</p></div></article>
-        <article class="mis locked"><div class="ph" data-bg="0"></div><div class="top"><span>Mission 04</span><span class="st lock">Locked</span></div><div class="in"><span class="no">04</span><h3>The Cat Cartel</h3><p>Lola floors it down Ocean Drive. Meme contests, collabs, merch drops and exchange outreach.</p></div></article>
-        <article class="mis locked"><div class="ph" data-bg="3"></div><div class="top"><span>Mission 05</span><span class="st lock">Locked</span></div><div class="in"><span class="no">05</span><h3>Nine Lives</h3><p>Lucky closes the register for the last time. A community-run empire that survives every dip and plot twist.</p></div></article>
+        <article class="mis"><div class="ph" data-bg="2"></div><div class="top"><span class="mtag"><i data-ic="paw"></i>Mission 01</span><span class="st done"><span data-ic="check"></span>Complete</span></div><div class="in"><span class="no">01</span><h3>Stray in Paradise</h3><p>A cat with nothing but a pair of shades steps off the bus in Vice City. The legend starts at the bus stop.</p></div></article>
+        <article class="mis"><div class="ph" data-bg="4"></div><div class="top"><span class="mtag"><i data-ic="coin"></i>Mission 02</span><span class="st done"><span data-ic="check"></span>Complete</span></div><div class="in"><span class="no">02</span><h3>The Solana Docks Job</h3><p>Fast chain, tiny fees, zero excuses. Mittens hacks the night sky and $VICECAT goes live on Solana.</p></div></article>
+        <article class="mis"><div class="ph" data-bg="1"></div><div class="top"><span class="mtag"><i data-ic="star"></i>Mission 03</span><span class="st prog"><span data-ic="radar"></span>In progress</span></div><div class="in"><span class="no">03</span><h3>Wanted: 5 Stars</h3><p>Officer Paws is on the radio. Grow the crew on Telegram and X: every new holder adds a star.</p></div></article>
+        <article class="mis locked"><div class="ph" data-bg="0"></div><div class="top"><span class="mtag"><i data-ic="car"></i>Mission 04</span><span class="st lock"><span data-ic="lock"></span>Locked</span></div><div class="in"><span class="no">04</span><h3>The Cat Cartel</h3><p>Lola floors it down Ocean Drive. Meme contests, collabs, merch drops and exchange outreach.</p></div></article>
+        <article class="mis locked"><div class="ph" data-bg="3"></div><div class="top"><span class="mtag"><i data-ic="cat"></i>Mission 05</span><span class="st lock"><span data-ic="lock"></span>Locked</span></div><div class="in"><span class="no">05</span><h3>Nine Lives</h3><p>Lucky closes the register for the last time. A community-run empire that survives every dip and plot twist.</p></div></article>
       </div>
-      <div class="hs-bar" id="hsbar"><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i></div>
+      <div class="chap" id="hsbar" role="tablist" aria-label="Chapter select"><button type="button" role="tab" data-c="0" aria-label="Mission 01"><span class="ci" data-ic="paw"></span><span class="cn">01</span><b></b></button><button type="button" role="tab" data-c="1" aria-label="Mission 02"><span class="ci" data-ic="coin"></span><span class="cn">02</span><b></b></button><button type="button" role="tab" data-c="2" aria-label="Mission 03"><span class="ci" data-ic="star"></span><span class="cn">03</span><b></b></button><button type="button" role="tab" data-c="3" aria-label="Mission 04"><span class="ci" data-ic="car"></span><span class="cn">04</span><b></b></button><button type="button" role="tab" data-c="4" aria-label="Mission 05"><span class="ci" data-ic="cat"></span><span class="cn">05</span><b></b></button></div>
     </div>
   </div>
 </section>
+
+<div class="sep road" aria-hidden="true"><i class="ln"></i><span class="rider" data-ic="car" data-ic-cls="drive"></span></div>
 
 <section id="crew">
   <div class="wrap">
     <div class="head rv"><div><div class="kick">Select your character</div><h2>The <span class="grad">crew</span></h2></div><p>Every cat in Vice City has a role and a rap sheet. Pick one to see their stats.</p></div>
     <div class="sel rv d1" id="sel" role="tablist" aria-label="Crew"></div>
-    <div class="crewhint"><span>◀ ▶ Hover or tap a card</span><span>5 / 5 unlocked</span></div>
+    <div class="crewhint"><span><i data-ic="select"></i>Hover or tap a card · ◀ ▶ keys</span><span><i data-ic="trophy"></i>5 / 5 unlocked</span></div>
   </div>
 </section>
+
+<div class="sep paws" aria-hidden="true"><span data-ic="paw" style="--i:0"></span><span data-ic="paw" style="--i:1"></span><span data-ic="paw" style="--i:2"></span><span data-ic="paw" style="--i:3"></span><span data-ic="paw" style="--i:4"></span><span data-ic="paw" style="--i:5"></span><span data-ic="paw" style="--i:6"></span></div>
 
 <section id="map">
   <div class="glowbg" style="width:500px;height:500px;left:-200px;top:20%;background:var(--cyan)"></div>
   <div class="wrap">
     <div class="head rv"><div><div class="kick">GPS · Waypoints</div><h2>City <span class="gradc">map</span></h2></div><p>Pick a spot on the map or in the list to zoom in and set your waypoint.</p></div>
     <div class="mapw rv d1">
-      <div class="mv"><div class="hud"><span>● GPS</span><span>Vice Bay</span></div><div class="mz" id="mz"><img data-i="5" alt="Map of Vice City and the Keys"></div></div>
+      <div class="mv"><div class="radar" aria-hidden="true"></div><div class="hud"><span class="g"><i data-ic="gps"></i>GPS</span><span id="coord">25.77°N · 80.19°W</span></div><div class="zoomc"><button type="button" id="zin" aria-label="Zoom in" data-ic="plus"></button><button type="button" id="zout" aria-label="Zoom out" data-ic="minus"></button><button type="button" id="zre" aria-label="Reset map view" data-ic="target"></button></div><div class="found" id="found"><i data-ic="gem"></i><b id="fcount">0/4</b> found</div><div class="mz" id="mz"><img data-i="5" alt="Map of Vice City and the Keys"></div></div>
       <div class="panel"><div id="mi" aria-live="polite"></div><ul class="plist" id="plist"></ul></div>
     </div>
   </div>
@@ -628,34 +953,36 @@ footer small{display:block;color:var(--dim);font-size:13px;line-height:1.6;max-w
     <div class="head rv"><div><div class="kick">Arcade</div><h2>The <span class="grad">games</span></h2></div><p>Warm up on the tap-cat cabinet, then hit the streets in VICE RUSH.</p></div>
     <div class="games">
       <div class="cab rv d1">
-        <div class="mar"><span>Cabinet 01</span><b>Tap · Cat</b><span>1P</span></div>
+        <div class="mar"><span class="led" data-ic="arcade">Cabinet 01</span><b>Tap · Cat</b><span class="hi">HI <em id="hi">000</em></span></div>
         <div class="arena">
           <h3>Raise your <span class="grad">wanted level</span></h3>
           <p>Tap the cat. Reach 5 stars before the cops show up.</p>
-          <div id="st2" aria-hidden="true"><b>★</b><b>★</b><b>★</b><b>★</b><b>★</b></div>
-          <button id="cat" aria-label="Meow">😼</button>
+          <div id="st2" aria-hidden="true"><b data-ic="star"></b><b data-ic="star"></b><b data-ic="star"></b><b data-ic="star"></b><b data-ic="star"></b></div>
+          <button id="cat" aria-label="Meow" data-ic="catface"></button>
           <div id="sc">0</div><div id="msg">Tap to meow</div>
           <div class="meter"><b id="meter"></b></div>
-          <div class="coin">INSERT COIN · PRESS CAT</div>
+          <div class="coin"><span data-ic="coin"></span>INSERT COIN · PRESS CAT</div>
         </div>
       </div>
       <a class="more rv d2" href="games/index.html" data-games>
         <div class="ph" data-bg="0"></div>
-        <div class="badge"><span>Mini game</span><span>3D · Browser</span></div>
+        <div class="badge"><span data-ic="controller">Mini game</span><span data-ic="car" data-ic-cls="drive">3D · Browser</span></div>
         <h3>VICE<br><em>RUSH</em></h3>
         <p>Want more than tapping? Jump into our neon crime-city mini game.</p>
-        <span class="btn pri" style="align-self:flex-start"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 5v14l12-7z"/></svg>Play VICE RUSH</span>
+        <span class="btn pri" style="align-self:flex-start" data-ic="play">Play VICE RUSH</span>
       </a>
     </div>
   </div>
 </section>
+
+<div class="sep ping" aria-hidden="true"><i class="ln"></i><span data-ic="coin"></span></div>
 
 <section id="token">
   <div class="glowbg" style="width:520px;height:520px;right:-220px;top:10%;background:var(--pink)"></div>
   <div class="wrap">
     <div class="head rv"><div><div class="kick">Tokenomics</div><h2>The <span class="grad">stash</span></h2></div><p><span class="note">⚠ Placeholder figures</span><br><br>Replace these placeholder numbers with your real tokenomics before launch.</p></div>
     <div class="dash">
-      <div class="card c-sup rv"><div class="lbl"><span>Total supply</span><span>$VICECAT</span></div><div><div class="big grad">1B</div><p style="color:var(--mute)">Total $VICECAT supply (placeholder).</p></div></div>
+      <div class="card c-sup rv"><div class="lbl"><span><i data-ic="coin"></i>Total supply</span><span>$VICECAT</span></div><div><div class="big grad">1B</div><div class="digits" id="supply" data-n="1000000000">0</div><p style="color:var(--mute)">Total $VICECAT supply (placeholder).</p></div></div>
       <div class="card c-don rv d1">
         <div class="dw" id="dw">
           <svg viewBox="0 0 220 220"><circle cx="110" cy="110" r="90" stroke="rgba(244,236,255,.06)"/></svg>
@@ -663,9 +990,9 @@ footer small{display:block;color:var(--dim);font-size:13px;line-height:1.6;max-w
         </div>
         <div class="leg" id="leg"></div>
       </div>
-      <div class="card c-chip rv"><span class="ic">0%</span><div><b>0% tax</b><small>Buy · Sell</small></div></div>
-      <div class="card c-chip rv d1"><span class="ic">🔥</span><div><b>LP burned</b><small>Liquidity</small></div></div>
-      <div class="card c-chip rv d2"><span class="ic">🔒</span><div><b>Mint revoked</b><small>Supply</small></div></div>
+      <div class="card c-chip rv hv"><span class="cic" data-ic="notax"></span><div><b>0% tax</b><small>Buy · Sell</small></div></div>
+      <div class="card c-chip rv d1 hv"><span class="cic" data-ic="flame"></span><div><b>LP burned</b><small>Liquidity</small></div></div>
+      <div class="card c-chip rv d2 hv"><span class="cic" data-ic="lock"></span><div><b>Mint revoked</b><small>Supply</small></div></div>
     </div>
   </div>
 </section>
@@ -674,12 +1001,12 @@ footer small{display:block;color:var(--dim);font-size:13px;line-height:1.6;max-w
   <div class="wrap">
     <div class="head rv"><div><div class="kick">How to buy</div><h2>Get in <span class="grad">the car</span></h2></div><p>Four steps. No driver’s license required.</p></div>
     <ol class="steps">
-      <li class="rv"><h3>Get a wallet</h3><p>Install Phantom or Solflare and save your recovery phrase offline.</p></li>
-      <li class="rv d1"><h3>Get SOL</h3><p>Buy SOL on an exchange and send it to your wallet.</p></li>
-      <li class="rv d2"><h3>Open a DEX</h3><p>Go to a Solana DEX such as Jupiter and connect your wallet.</p></li>
-      <li class="rv d3"><h3>Swap</h3><p>Paste the contract address below, check it matches, then swap SOL for $VICECAT.</p></li>
+      <li class="rv"><span class="sic" data-ic="wallet"></span><h3>Get a wallet</h3><p>Install Phantom or Solflare and save your recovery phrase offline.</p></li>
+      <li class="rv d1"><span class="sic" data-ic="coin"></span><h3>Get SOL</h3><p>Buy SOL on an exchange and send it to your wallet.</p></li>
+      <li class="rv d2"><span class="sic" data-ic="store"></span><h3>Open a DEX</h3><p>Go to a Solana DEX such as Jupiter and connect your wallet.</p></li>
+      <li class="rv d3"><span class="sic" data-ic="swap"></span><h3>Swap</h3><p>Paste the contract address below, check it matches, then swap SOL for $VICECAT.</p></li>
     </ol>
-    <div class="ca rv"><span>Contract</span><code id="ca">PASTE_CONTRACT_ADDRESS_HERE</code><button class="btn pri sm" id="cp">Copy address</button></div>
+    <div class="ca rv"><span><i data-ic="gps"></i>Contract</span><code id="ca">PASTE_CONTRACT_ADDRESS_HERE</code><button class="btn pri sm" id="cp" data-ic="copy">Copy address</button></div>
   </div>
 </section>
 
@@ -692,11 +1019,11 @@ footer small{display:block;color:var(--dim);font-size:13px;line-height:1.6;max-w
       <h2>Stay <span class="grad">wanted.</span></h2>
       <p>Follow the crew, post your best cat memes and watch the chart. Every new holder adds a star.</p>
       <div class="soc">
-        <a class="btn ghost" href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.8 3h3.1l-6.8 7.8L22 21h-6.2l-4.9-6.4L5.3 21H2.2l7.3-8.3L2 3h6.4l4.4 5.8L17.8 3zm-1.1 16.2h1.7L7.4 4.7H5.6l11.1 14.5z"/></svg>X</a>
-        <a class="btn ghost" href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3 18.7 19.4c-.2 1-.9 1.3-1.7.8l-4.8-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.9 9-8.1c.4-.3-.1-.5-.6-.2L6.4 13.2 1.6 11.7c-1-.3-1-1 .2-1.5L20.6 3c.9-.3 1.6.2 1.3 1.3z"/></svg>Telegram</a>
-        <a class="btn ghost" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg>Chart</a>
+        <a class="stile hv" href="#" aria-label="X"><span class="sb" data-ic="x"></span><b>X</b><small>Follow the crew</small></a>
+        <a class="stile hv" href="#" aria-label="Telegram"><span class="sb" data-ic="telegram"></span><b>Telegram</b><small>Join the chat</small></a>
+        <a class="stile hv" href="#" aria-label="Chart"><span class="sb" data-ic="chart"></span><b>Chart</b><small>Watch the heat</small></a>
       </div>
-      <div class="ctas"><a class="btn pri" href="#buy">Buy $VICECAT</a><a class="btn sec" href="games/index.html" data-games>Play now</a></div>
+      <div class="ctas"><a class="btn pri" href="#buy" data-ic="coin">Buy $VICECAT</a><a class="btn sec" href="games/index.html" data-games data-ic="controller">Play now</a></div>
     </div>
   </div>
 </section>
@@ -704,8 +1031,8 @@ footer small{display:block;color:var(--dim);font-size:13px;line-height:1.6;max-w
 <footer>
   <div class="wrap">
     <div class="fw">
-      <a class="logo" href="#hero"><span class="mk" aria-hidden="true">😼</span>$VICECAT</a>
-      <nav aria-label="Footer"><a href="#story">Story</a><a href="#crew">The Crew</a><a href="#map">City Map</a><a href="#play">Games</a><a href="#token">Tokenomics</a><a href="#buy">How to buy</a><a href="#" data-replay>↺ Replay intro</a></nav>
+      <a class="logo hv" href="#hero"><span class="mk" data-ic="cat" aria-hidden="true"></span>$VICECAT</a>
+      <nav aria-label="Footer"><a href="#story">Story</a><a href="#crew">The Crew</a><a href="#map">City Map</a><a href="#play">Games</a><a href="#token">Tokenomics</a><a href="#buy">How to buy</a><a href="#" data-replay data-ic="play">Replay intro</a></nav>
     </div>
     <small>$VICECAT is a meme coin with no intrinsic value and no promise of returns. Crypto is volatile and you can lose everything. This is not financial advice. This fan project is not affiliated with any game studio or publisher.</small>
   </div>
@@ -720,11 +1047,62 @@ const MINIGAMES_URL="games/index.html";
 document.querySelectorAll("[data-games]").forEach(a=>a.href=MINIGAMES_URL);
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+/* ===== VICE CAT icon set: 24px grid, 1.8 stroke, round joins; .f = solid, .a = accent ===== */
+const ICONS={
+paw:'<path class="f" d="M12 12.6c-2.7 0-5.2 2.4-5.2 4.7 0 1.6 1.1 2.5 2.7 2.5 1 0 1.7-.5 2.5-.5s1.5.5 2.5.5c1.6 0 2.7-.9 2.7-2.5 0-2.3-2.5-4.7-5.2-4.7z"/><ellipse class="f toe" cx="5.4" cy="10" rx="1.9" ry="2.5" transform="rotate(-22 5.4 10)"/><ellipse class="f toe" cx="9.3" cy="5.9" rx="2" ry="2.7" transform="rotate(-6 9.3 5.9)"/><ellipse class="f toe" cx="14.7" cy="5.9" rx="2" ry="2.7" transform="rotate(6 14.7 5.9)"/><ellipse class="f toe" cx="18.6" cy="10" rx="1.9" ry="2.5" transform="rotate(22 18.6 10)"/>',
+cat:'<g class="ears"><path d="M5.2 9.6 4.6 3.4 9.2 6.5"/><path d="M18.8 9.6l.6-6.2-4.6 3.1"/></g><path d="M9.2 6.5c.9-.3 1.8-.4 2.8-.4s1.9.1 2.8.4M5.2 9.6C4.5 10.8 4 12.1 4 13.5 4 17.6 7.6 20.6 12 20.6s8-3 8-7.1c0-1.4-.5-2.7-1.2-3.9"/><path class="a shades" d="M5.9 11h5l-.5 2.3a1.9 1.9 0 0 1-1.9 1.5h-.7a1.9 1.9 0 0 1-1.9-1.6zM13.1 11h5l-.3 2.2a1.9 1.9 0 0 1-1.9 1.6h-.7a1.9 1.9 0 0 1-1.9-1.5z"/><path d="M10.9 11.4h2.2"/><path class="glint" d="M7.4 12.2l1.2-.9M14.6 12.2l1.2-.9" stroke="#fff" stroke-width="1"/><path d="M11 16.9l1 .7 1-.7M3.2 15.2l3-.6M3.6 18l2.8-1.3M20.8 15.2l-3-.6M20.4 18l-2.8-1.3" stroke-width="1.4"/>',
+catface:'<g class="ears"><path d="M5 10 4.4 3.2 9.4 6.4"/><path d="M19 10l.6-6.8-5 3.2"/></g><path d="M9.4 6.4c.8-.2 1.7-.3 2.6-.3s1.8.1 2.6.3M5 10c-.7 1.2-1.1 2.5-1.1 3.9 0 4 3.6 6.9 8.1 6.9s8.1-2.9 8.1-6.9c0-1.4-.4-2.7-1.1-3.9"/><g class="eyes"><ellipse class="a" cx="8.8" cy="12.6" rx="1.5" ry="1.9"/><ellipse class="a" cx="15.2" cy="12.6" rx="1.5" ry="1.9"/></g><path d="M11.1 16.2h1.8l-.9 1zM12 17.2v.8m0 0c-.5.8-1.5 1-2.2.5M12 18c.5.8 1.5 1 2.2.5" stroke-width="1.4"/>',
+star:'<path class="f" d="M12 2.8l2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 16.6l-5.4 2.9 1.1-6.1-4.5-4.2 6.1-.8z"/>',
+badge:'<path d="M12 2.6l7.4 2.9v5.6c0 4.8-3.1 8.6-7.4 10.3-4.3-1.7-7.4-5.5-7.4-10.3V5.5z"/><path class="a" d="M12 7.6l1.3 2.6 2.9.4-2.1 2 .5 2.9-2.6-1.4-2.6 1.4.5-2.9-2.1-2 2.9-.4z" stroke="none"/>',
+car:'<path d="M2.6 15.4v-2.1c0-.8.5-1.4 1.2-1.6l3.7-.9 2.9-2.6c.5-.4 1.1-.7 1.8-.7h3.4c.8 0 1.5.4 2 1l2 2.4 1.6.5c.7.2 1.2.9 1.2 1.6v2.4M8.6 15.7h6.8"/><path d="M10.4 10.9l1.5-1.4h3.3l1.3 1.4z" stroke-width="1.3"/><g class="wheel"><circle cx="6.2" cy="15.7" r="2.2"/><path d="M6.2 14.4v2.6M4.9 15.7h2.6" stroke-width="1.1"/></g><g class="wheel w2"><circle cx="17.8" cy="15.7" r="2.2"/><path d="M17.8 14.4v2.6M16.5 15.7h2.6" stroke-width="1.1"/></g><path class="hl" d="M21.4 12.9h.9" stroke-width="2.2"/><path class="beam" d="M22.6 12.6l-.01 0" stroke-width="0"/><path class="speed" d="M.6 10.4h3.2M1.4 8.4h2.4" stroke-width="1.3"/>',
+palm:'<path d="M12.6 21c.4-3.4.2-6.9-1-10.2"/><path class="a" d="M11.6 10.8C10.7 7.9 7.6 6.6 4.4 7.6c2.1.3 4.1 1.3 5.3 3.3M11.6 10.8c2.4-2 5.8-2 8.2.2-1.9-.5-4-.2-5.6 1M11.6 10.8C12 7.9 14.2 5.6 17.4 5c-1.5 1.1-2.6 2.8-2.9 4.8M11.6 10.8c-2.6-1-5.6.2-7 2.8 1.4-.9 3.1-1.3 4.8-1.1" stroke-width="1.6"/><path d="M8 21h9" stroke-width="1.4"/>',
+city:'<path d="M3 20.5h18M4.5 20.5V11h4v9.5M8.5 20.5V6.5h5v14M13.5 20.5v-8h5v8"/><path class="a win" d="M10.3 9h1.4M10.3 11.8h1.4M10.3 14.6h1.4M6 13.8h1M15.5 15h1.2M15.5 17.6h1.2" stroke-width="1.5"/><path d="M11 6.5V4" stroke-width="1.4"/><circle class="a blink" cx="11" cy="3.3" r=".9" stroke="none"/>',
+gps:'<circle class="ring" cx="12" cy="10" r="7.5" stroke-width="1.2"/><path d="M12 21s-5.2-5.4-5.2-9.6a5.2 5.2 0 0 1 10.4 0C17.2 15.6 12 21 12 21z"/><circle class="a dot" cx="12" cy="11.2" r="2" stroke="none"/>',
+radar:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5.3" stroke-width="1.2" opacity=".55"/><path d="M12 3v18M3 12h18" stroke-width=".9" opacity=".4"/><path class="sweep a" d="M12 12V3a9 9 0 0 1 7.8 4.5z" stroke="none" opacity=".55"/><circle class="blip" cx="15.6" cy="8.6" r="1.2" stroke="none" fill="currentColor"/>',
+radio:'<path d="M15.5 6.4 18.6 2.4"/><rect x="3.4" y="6.4" width="17.2" height="13" rx="2.6"/><circle cx="8.6" cy="13" r="3.3"/><circle class="a" cx="8.6" cy="13" r="1.2" stroke="none"/><path d="M14 10.2h3.8" stroke-width="1.5"/><g class="dial"><circle cx="16" cy="15.2" r="1.9" stroke-width="1.3"/><path d="M16 15.2v-1.9" stroke-width="1.3"/></g><g class="waves" stroke-width="1.3"><path class="wv" d="M21.6 9.6c.9 1.1.9 2.7 0 3.8"/><path class="wv w2" d="M23 8.4c1.5 1.8 1.5 4.4 0 6.2"/></g>',
+controller:'<path d="M7.4 7.6h9.2a4.4 4.4 0 0 1 4.3 3.6l.9 4.9a2.5 2.5 0 0 1-4.5 1.9L15.6 16H8.4l-1.7 2a2.5 2.5 0 0 1-4.5-1.9l.9-4.9a4.4 4.4 0 0 1 4.3-3.6z"/><path d="M7.4 10.4v3.4M5.7 12.1h3.4" stroke-width="1.6"/><circle class="a led" cx="15.8" cy="11" r="1.1" stroke="none"/><circle class="led l2" cx="17.9" cy="13" r="1.1" stroke="none" fill="currentColor"/><path d="M10.8 5.2c0-1 .6-1.6 1.2-1.6s1.2.6 1.2 1.6v2.4" stroke-width="1.3"/>',
+arcade:'<path d="M6.2 21.2V3.8c0-.7.5-1.2 1.2-1.2h9.2c.7 0 1.2.5 1.2 1.2v17.4M4.8 21.2h14.4"/><rect class="scr" x="8.2" y="5" width="7.6" height="5.6" rx=".8" stroke-width="1.4"/><path d="M6.2 12.8h11.6" stroke-width="1.3"/><path d="M10 12.8v-1.6" stroke-width="1.3"/><circle cx="10" cy="10.6" r="1" stroke="none" fill="currentColor"/><circle class="a led" cx="14" cy="14.8" r=".95" stroke="none"/><path class="slot" d="M11.2 18h1.6" stroke-width="1.6"/>',
+marker:'<path d="M12 2.6l6.4 6.4L12 21.4 5.6 9z"/><path class="a" d="M12 6.6l1.05 2.1 2.3.3-1.7 1.6.4 2.3-2.05-1.1-2.05 1.1.4-2.3-1.7-1.6 2.3-.3z" stroke="none"/>',
+wallet:'<path d="M18.6 7.2V5.4c0-.8-.6-1.4-1.4-1.4H5.4A2.4 2.4 0 0 0 3 6.4v11.2A2.4 2.4 0 0 0 5.4 20h13.2c.8 0 1.4-.6 1.4-1.4V8.6c0-.8-.6-1.4-1.4-1.4H5.4A2.4 2.4 0 0 1 3 6.4"/><path d="M20.6 11.4h-4a1.7 1.7 0 0 0 0 3.4h4z"/><circle class="a" cx="16.7" cy="13.1" r=".95" stroke="none"/>',
+coin:'<g class="spin"><circle cx="12" cy="12" r="8.8"/><circle cx="12" cy="12" r="6.4" stroke-width="1.1" stroke-dasharray="1.6 1.5"/><path class="a" stroke="none" d="M12 12.4c-1.5 0-2.8 1.3-2.8 2.5 0 .9.6 1.4 1.5 1.4.5 0 .9-.3 1.3-.3s.8.3 1.3.3c.9 0 1.5-.5 1.5-1.4 0-1.2-1.3-2.5-2.8-2.5zM9 11a1 1.3 0 1 0 0-.01zM11.1 8.9a1.05 1.4 0 1 0 0-.01zM12.9 8.9a1.05 1.4 0 1 0 0-.01zM15 11a1 1.3 0 1 0 0-.01z"/></g>',
+select:'<path d="M3.4 8V5.4c0-1.1.9-2 2-2H8M16 3.4h2.6c1.1 0 2 .9 2 2V8M20.6 16v2.6c0 1.1-.9 2-2 2H16M8 20.6H5.4c-1.1 0-2-.9-2-2V16"/><circle class="a" cx="12" cy="9.6" r="2.7" stroke="none"/><path d="M7.6 17.4c.6-2.3 2.4-3.6 4.4-3.6s3.8 1.3 4.4 3.6"/>',
+gem:'<path d="M7 3.8h10l3.8 5.1L12 20.6 3.2 8.9z"/><path d="M3.2 8.9h17.6M9.4 3.8 8 8.9l4 11.7 4-11.7-1.4-5.1" stroke-width="1.3"/><path class="a shine" d="M9 6.2l1-1.2" stroke-width="1.5"/>',
+trophy:'<path d="M8.4 3.6h7.2v2.6M8.4 3.6v2.6"/><circle cx="12" cy="13.6" r="6"/><path class="a" stroke="none" d="M12 10.1l1.1 2.2 2.4.3-1.75 1.7.4 2.4-2.15-1.15-2.15 1.15.4-2.4-1.75-1.7 2.4-.3z"/><path d="M8.4 6.2 12 7.6l3.6-1.4" stroke-width="1.3"/>',
+chart:'<rect x="3" y="3.6" width="18" height="16.8" rx="2.4"/><path class="line" d="M6.4 16l3.4-4 2.9 2.4 4.9-6" stroke-width="1.9"/><path d="M15 8.4h2.6V11" stroke-width="1.6"/>',
+x:'<path class="f" d="M17.6 3.2h3.1l-6.8 7.8 8 10H15.7l-4.9-6.4-5.6 6.4H2.1l7.3-8.3L1.8 3.2h6.4l4.4 5.8zm-1.1 16h1.7L7.2 4.9H5.4z"/>',
+telegram:'<path class="f" d="M21.5 4.4 18.4 19.2c-.2 1-.9 1.3-1.7.8l-4.7-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.8 8.8-7.9c.4-.3-.1-.5-.6-.2L6.3 13.1l-4.7-1.5c-1-.3-1-1 .2-1.5l18.4-7.1c.9-.3 1.6.2 1.3 1.4z"/>',
+flame:'<path d="M12 21.2c3.9 0 6.6-2.6 6.6-6.4 0-4-3-6.6-4.3-11-2.6 1.6-3.9 4.3-3.6 6.8-1-.6-1.7-1.6-1.9-2.8-1.9 1.7-3.4 4.1-3.4 7 0 3.8 2.7 6.4 6.6 6.4z"/><path class="a core" stroke="none" d="M12 19.4c1.7 0 2.9-1.1 2.9-2.8 0-1.8-1.3-2.9-1.9-4.8-1.2.7-1.7 1.9-1.6 3-.5-.3-.8-.7-.9-1.2-.8.8-1.5 1.8-1.5 3 0 1.7 1.2 2.8 3 2.8z"/>',
+lock:'<rect x="4.6" y="10.4" width="14.8" height="10.4" rx="2.4"/><path class="shackle" d="M8 10.4V7.6a4 4 0 0 1 8 0v2.8"/><circle class="a" cx="12" cy="15.4" r="1.6" stroke="none"/>',
+notax:'<circle cx="12" cy="12" r="8.8"/><path class="a" d="M8.8 8.8 15.2 15.2M15.2 8.8l-6.4 6.4" stroke-width="2.2"/>',
+swap:'<path d="M4 8.4h14.4l-3.6-3.6M20 15.6H5.6l3.6 3.6"/>',
+copy:'<rect x="8.2" y="8.2" width="12" height="12" rx="2.2"/><path d="M15.8 8.2V5.8c0-1.2-1-2.2-2.2-2.2H5.8c-1.2 0-2.2 1-2.2 2.2v7.8c0 1.2 1 2.2 2.2 2.2h2.4"/>',
+arrow:'<path d="M4.6 12h14.2M13.2 6.2 19 12l-5.8 5.8" stroke-width="2.2"/>',
+play:'<path class="f" d="M7.2 4.6v14.8c0 .8.9 1.3 1.6.8l11-7.4c.6-.4.6-1.2 0-1.6l-11-7.4c-.7-.5-1.6 0-1.6.8z"/>',
+check:'<path d="M4.6 12.6l4.6 4.6L19.6 6.8" stroke-width="2.3"/>',
+signal:'<path class="sb s1" d="M4.5 19v-3" stroke-width="2.4"/><path class="sb s2" d="M9.5 19v-6" stroke-width="2.4"/><path class="sb s3" d="M14.5 19v-9" stroke-width="2.4"/><path class="sb s4" d="M19.5 19V7" stroke-width="2.4"/>',
+plus:'<path d="M12 5v14M5 12h14" stroke-width="2.2"/>',
+minus:'<path d="M5 12h14" stroke-width="2.2"/>',
+target:'<circle cx="12" cy="12" r="6.6"/><circle class="a" cx="12" cy="12" r="2" stroke="none"/><path d="M12 2.4v3M12 18.6v3M2.4 12h3M18.6 12h3"/>',
+gift:'<rect x="3.6" y="8.4" width="16.8" height="4.2" rx="1"/><path d="M5.2 12.6v7.2h13.6v-7.2M12 8.4v11.4"/><path class="a" d="M12 8.4C10.6 5 7.2 4.6 7.2 6.6c0 1.2 1.6 1.8 4.8 1.8zM12 8.4c1.4-3.4 4.8-3.8 4.8-1.8 0 1.2-1.6 1.8-4.8 1.8z" stroke-width="1.5"/>',
+megaphone:'<path d="M3.6 10v4c0 .7.5 1.2 1.2 1.2h2.4L16.8 20V4L7.2 8.8H4.8c-.7 0-1.2.5-1.2 1.2zM7.4 15.2l1.4 4.8"/><path class="wv" d="M19.4 9.4c1.1 1.4 1.1 3.8 0 5.2" stroke-width="1.6"/>',
+store:'<path d="M3.6 9.2 5 4h14l1.4 5.2c0 1.5-1.2 2.6-2.6 2.6s-2.6-1.1-2.6-2.6c0 1.5-1.4 2.6-3.2 2.6s-3.2-1.1-3.2-2.6c0 1.5-1.2 2.6-2.6 2.6S3.6 10.7 3.6 9.2zM5 11.8V20h14v-8.2"/><rect class="a" x="10" y="14.4" width="4" height="5.6" rx=".6" stroke="none"/>',
+terminal:'<rect x="2.8" y="4" width="18.4" height="14.4" rx="2.4"/><path d="M6.8 9.2l2.8 2.6-2.8 2.6" stroke-width="2"/><path class="a cursor" d="M11.8 14.4h5" stroke-width="2"/><path d="M8 21.2h8" stroke-width="1.6"/>',
+crown:'<path d="M3.8 17.6 2.8 7.4l5.2 4.2L12 4.8l4 6.8 5.2-4.2-1 10.2z"/><path d="M4.6 20.4h14.8" stroke-width="2"/><circle class="a" cx="12" cy="13.6" r="1.5" stroke="none"/>',
+sound:'<path d="M4 9.4v5.2h3.4L12.2 19V5L7.4 9.4z"/><g class="waves" stroke-width="1.7"><path class="wv" d="M15.6 9.2c.9.8 1.3 1.8 1.3 2.8s-.4 2-1.3 2.8"/><path class="wv w2" d="M18.2 6.6c1.6 1.4 2.4 3.3 2.4 5.4s-.8 4-2.4 5.4"/></g>',
+mute:'<path d="M4 9.4v5.2h3.4L12.2 19V5L7.4 9.4z"/><path d="M16 9.6l4.8 4.8M20.8 9.6 16 14.4" stroke-width="1.8"/>',
+map:'<path d="M3.4 6.2 9 3.8l6 2.4 5.6-2.4v14l-5.6 2.4-6-2.4-5.6 2.4z"/><path d="M9 3.8v14M15 6.2v14" stroke-width="1.3"/><circle class="a" cx="12" cy="11" r="1.6" stroke="none"/>',
+book:'<path d="M12 6.8C10.2 5.2 7.4 4.6 3.6 4.8v13.6c3.8-.2 6.6.4 8.4 2 1.8-1.6 4.6-2.2 8.4-2V4.8c-3.8-.2-6.6.4-8.4 2zM12 6.8v13.6"/><path class="a" d="M6.4 9h3M6.4 12h3M14.6 9h3" stroke-width="1.4"/>',
+home:'<path d="M3.6 11 12 3.8l8.4 7.2M5.8 9.2v11h12.4v-11"/><rect class="a" x="10.2" y="14" width="3.6" height="6.2" rx=".6" stroke="none"/>'
+};
+function icon(name,cls){return `<svg class="ic ic-${name}${cls?" "+cls:""}" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICONS[name]||""}</svg>`}
+document.querySelectorAll("[data-ic]").forEach(el=>{el.insertAdjacentHTML(el.dataset.icPos==="end"?"beforeend":"afterbegin",icon(el.dataset.ic,el.dataset.icCls))});
+
 const crew=[["Lola Lynx","Getaway driver. Her coupe has never been caught.",[95,70,85]],["Officer Paws","Vice City PD. Chases the crew nightly, never catches them.",[55,40,20]],["Cap Catnip","The boss. Shades on, nine lives in the bank.",[98,80,90]],["Lucky","Night clerk at Out of Town. Knows every secret.",[40,30,100]],["Mittens.exe","Rooftop hacker. Types at 200 WPM.",[75,95,55]]];
 
 /* crew cards */
-$("#sel").innerHTML=crew.map((c,i)=>`<button class="cc" role="tab" data-k="${i}" aria-label="${c[0]}"><div class="ph" data-bg="${i+6}"></div><span class="num">0${i+1}</span><span class="p1">P1 ▸ SELECTED</span><span class="vn">${c[0]}</span>
-<div class="info"><h3>${c[0]}</h3><p>${c[1]}</p>${["Style","Chaos","Luck"].map((s,j)=>`<div class="stat">${s}<i><b style="--v:${c[2][j]}%"></b></i><em>${c[2][j]}</em></div>`).join("")}</div></button>`).join("");
+const crewIc=["car","badge","crown","store","terminal"],statIc=["star","flame","gem"];
+$("#sel").innerHTML=crew.map((c,i)=>`<button class="cc" role="tab" data-k="${i}" aria-label="${c[0]}"><div class="ph" data-bg="${i+6}"></div><span class="bdg">${icon(crewIc[i])}</span><span class="num">0${i+1}</span><span class="p1">${icon("select")}P1 · SELECTED</span><span class="vn">${c[0]}</span>
+<div class="info"><h3>${c[0]}</h3><p>${c[1]}</p>${["Style","Chaos","Luck"].map((s,j)=>`<div class="stat">${icon(statIc[j])}${s}<i><b style="--v:${c[2][j]}%"></b></i><em data-v="${c[2][j]}">${c[2][j]}</em></div>`).join("")}</div></button>`).join("");
 
 /* images */
 $$("[data-bg]").forEach(e=>e.style.backgroundImage=`url(${IMG[e.dataset.bg]})`);
@@ -986,14 +1364,16 @@ ht=setTimeout(()=>show(1),5200);
 if(!reduce)hero.addEventListener("pointermove",e=>{const r=hero.getBoundingClientRect();hero.style.setProperty("--mx",((e.clientX-r.left)/r.width-.5)*2);hero.style.setProperty("--my",((e.clientY-r.top)/r.height-.5)*2)});
 
 /* story: pinned horizontal scroll */
-const hs=$("#hs"),track=$("#track"),bars=$$("#hsbar b");
+const hs=$("#hs"),track=$("#track"),bars=$$("#hsbar button");
 function sizeHS(){if(innerWidth<=760){hs.style.height="";return}const dist=track.scrollWidth-innerWidth;hs.style.height=(innerHeight+dist)+"px"}
 function runHS(){if(innerWidth<=760)return;const r=hs.getBoundingClientRect(),dist=track.scrollWidth-innerWidth,p=Math.min(Math.max(-r.top/(hs.offsetHeight-innerHeight||1),0),1);
-  track.style.transform=`translate3d(${-p*dist}px,0,0)`;const seg=p*bars.length;bars.forEach((b,i)=>b.style.setProperty("--p",Math.min(Math.max(seg-i,0),1)))}
+  track.style.transform=`translate3d(${-p*dist}px,0,0)`;const seg=p*bars.length;bars.forEach((b,i)=>b.style.setProperty("--p",Math.min(Math.max(seg-i,0),1)));if(typeof curChap==="function")curChap()}
 
 /* crew select */
 let a=2,auto;const cards=$$(".cc");
-function setCrew(k){a=k;cards.forEach((c,i)=>{c.classList.toggle("on",i===a);c.setAttribute("aria-selected",i===a)})}
+function countUp(el,to,ms,fmt){if(reduce){el.textContent=fmt?fmt(to):to;return}const s=performance.now();(function f(n){const q=Math.min((n-s)/ms,1),v=Math.round(to*(1-(1-q)**3));el.textContent=fmt?fmt(v):v;if(q<1)requestAnimationFrame(f)})(s)}
+function setCrew(k){const ch=k!==a||!cards[k].classList.contains("on");a=k;cards.forEach((c,i)=>{c.classList.toggle("on",i===a);c.setAttribute("aria-selected",i===a)});
+  if(ch){const c=cards[a];c.classList.remove("scan");void c.offsetWidth;c.classList.add("scan");c.querySelectorAll(".stat em").forEach(e=>countUp(e,+e.dataset.v,900))}}
 const stopAuto=()=>clearInterval(auto);
 cards.forEach(c=>{c.onclick=()=>{stopAuto();setCrew(+c.dataset.k)};c.addEventListener("pointerenter",e=>{if(e.pointerType==="mouse"&&innerWidth>760){stopAuto();setCrew(+c.dataset.k)}})});
 $("#sel").addEventListener("keydown",e=>{if(e.key==="ArrowRight"||e.key==="ArrowLeft"){stopAuto();setCrew((a+(e.key==="ArrowRight"?1:-1)+crew.length)%crew.length);cards[a].focus()}});
@@ -1002,13 +1382,23 @@ setCrew(2);if(!reduce)auto=setInterval(()=>setCrew((a+1)%crew.length),4500);
 /* map */
 const pins=[["Vice City: Buy Zone","Swap SOL for $VICECAT on a Solana DEX. Shades recommended.",80,44.9,"#ff2e88"],["Port Gellhorn: Chart","Track price, volume and holders on your favorite chart site.",58,80.5,"#21e6f2"],["The Keys: The Crew","Join the Telegram, follow on X and post your best cat memes.",28,90.8,"#ffc857"],["The Glades: The Stash","Merch, stickers and secret drops are coming. Watch the swamp.",42,46,"#8b5cff"]];
 const mz=$("#mz");
-mz.insertAdjacentHTML("beforeend",pins.map((p,i)=>`<button class="pn" data-i="${i}" style="left:${p[2]}%;top:${p[3]}%;--c:${p[4]}" aria-label="${p[0]}"><span class="lb">${p[0].split(":")[0]}</span></button>`).join(""));
-$("#plist").innerHTML=pins.map((p,i)=>`<li><button data-i="${i}" style="--c:${p[4]}"><i>0${i+1}</i><span>${p[0]}</span></button></li>`).join("");
-function intro(){$("#mi").innerHTML="<small>Waypoint · none</small><h3>Vice Bay</h3><p>Four spots worth a visit. Pick one to zoom in.</p>"}
-function pick(i){$$(".pn,#plist button").forEach(p=>p.classList.toggle("a",p.dataset.i==i));const p=pins[i];
-  mz.style.setProperty("--ox",p[2]+"%");mz.style.setProperty("--oy",p[3]+"%");mz.style.setProperty("--z",2);
-  $("#mi").innerHTML=`<small style="color:${p[4]}">Waypoint set · 0${+i+1}</small><h3>${p[0]}</h3><p>${p[1]}</p><button class="btn ghost sm" id="rz">Zoom out</button>`;
-  $("#rz").onclick=()=>{mz.style.setProperty("--z",1);$$(".pn,#plist button").forEach(p=>p.classList.remove("a"));intro()}}
+const pinIc=["coin","chart","paw","gem"],coords=[["25.79°N","80.13°W"],["25.62°N","80.31°W"],["24.70°N","81.10°W"],["25.71°N","80.62°W"]];
+mz.insertAdjacentHTML("beforeend",pins.map((p,i)=>`<button class="pn" data-i="${i}" style="left:${p[2]}%;top:${p[3]}%;--c:${p[4]}" aria-label="${p[0]}"><span class="pi">${icon(pinIc[i])}</span><span class="lb">${p[0].split(":")[0]}</span></button>`).join(""));
+$("#plist").innerHTML=pins.map((p,i)=>`<li><button data-i="${i}" style="--c:${p[4]}"><i>${icon(pinIc[i])}</i><span>${p[0]}</span><em class="vis" aria-label="visited">${icon("check")}</em></button></li>`).join("");
+let seenWp=[];try{seenWp=JSON.parse(localStorage.getItem("vcSeen")||"[]")}catch(e){}
+function paintSeen(){$("#fcount").textContent=seenWp.length+"/"+pins.length;$$("#plist button").forEach(b=>b.classList.toggle("seenWp",seenWp.includes(+b.dataset.i)))}
+function ach(title,ic){const el=document.createElement("div");el.className="ach";el.setAttribute("role","status");el.innerHTML=`<span class="ai">${icon(ic)}</span><span><small>Achievement unlocked</small><b>${title}</b></span>`;document.body.appendChild(el);requestAnimationFrame(()=>el.classList.add("on"));setTimeout(()=>el.classList.remove("on"),3200);setTimeout(()=>el.remove(),3800)}
+function setZ(z){z=Math.max(1,Math.min(3,z));mz.style.setProperty("--z",z);mz.dataset.z=z}
+function intro(){$("#mi").innerHTML=`<small>${icon("radar")}Waypoint · none</small><h3>Vice Bay</h3><p>Four spots worth a visit. Pick one to zoom in.</p>`;$("#coord").textContent="25.77°N · 80.19°W"}
+function pick(i){i=+i;$$(".pn,#plist button").forEach(p=>p.classList.toggle("a",p.dataset.i==i));const p=pins[i];
+  mz.style.setProperty("--ox",p[2]+"%");mz.style.setProperty("--oy",p[3]+"%");setZ(2);
+  $("#mi").innerHTML=`<small style="color:${p[4]}">${icon("gps")}Waypoint set · 0${i+1}</small><h3>${p[0]}</h3><p>${p[1]}</p><button class="btn ghost sm" id="rz">${icon("target")}Zoom out</button>`;
+  $("#coord").textContent=coords[i].join(" · ");
+  $("#rz").onclick=resetMap;
+  if(!seenWp.includes(i)){seenWp.push(i);try{localStorage.setItem("vcSeen",JSON.stringify(seenWp))}catch(e){}paintSeen();const f=$("#found");f.classList.remove("pop");void f.offsetWidth;f.classList.add("pop");if(seenWp.length===pins.length)ach("Tourist of Vice Bay","trophy")}}
+function resetMap(){setZ(1);mz.style.setProperty("--ox","50%");mz.style.setProperty("--oy","50%");$$(".pn,#plist button").forEach(p=>p.classList.remove("a"));intro()}
+$("#zin").onclick=()=>setZ((+mz.dataset.z||1)+.5);$("#zout").onclick=()=>setZ((+mz.dataset.z||1)-.5);$("#zre").onclick=resetMap;
+paintSeen();
 $$(".pn,#plist button").forEach(p=>p.onclick=()=>pick(p.dataset.i));intro();
 
 /* tokenomics donut */
@@ -1018,10 +1408,11 @@ const svg=$("#dw svg");
 parts.forEach((p,i)=>{const len=p[0]/100*C;const c=document.createElementNS("http://www.w3.org/2000/svg","circle");
   c.setAttribute("cx",110);c.setAttribute("cy",110);c.setAttribute("r",90);c.setAttribute("stroke",p[2]);c.setAttribute("class","seg");c.dataset.i=i;
   c.style.strokeDashoffset=-off;c.dataset.len=Math.max(len-gap,1);svg.appendChild(c);off+=len});
-$("#leg").innerHTML=parts.map((p,i)=>`<div data-i="${i}" style="--c:${p[2]}"><b data-n="${p[0]}">0%</b><span>${p[1]}</span><i></i></div>`).join("");
+const legIc=["paw","gift","megaphone","lock"];
+$("#leg").innerHTML=parts.map((p,i)=>`<div data-i="${i}" style="--c:${p[2]}"><span class="li">${icon(legIc[i])}</span><b data-n="${p[0]}">0%</b><span>${p[1]}</span><i></i></div>`).join("");
 const dw=$("#dw");
 $$("#leg div").forEach(d=>{d.onmouseenter=()=>{dw.classList.add("dim");$$(".seg")[d.dataset.i].classList.add("hl")};d.onmouseleave=()=>{dw.classList.remove("dim");$$(".seg").forEach(s=>s.classList.remove("hl"))}});
-function drawDonut(){$$(".seg").forEach((c,i)=>setTimeout(()=>c.style.strokeDasharray=`${c.dataset.len} ${C}`,i*180));
+function drawDonut(){const sp=$("#supply");if(sp)countUp(sp,+sp.dataset.n,1800,v=>v.toLocaleString("en-US"));$$(".seg").forEach((c,i)=>setTimeout(()=>c.style.strokeDasharray=`${c.dataset.len} ${C}`,i*180));
   $$("#leg div").forEach(d=>d.style.setProperty("--w",d.querySelector("b").dataset.n+"%"));
   $$("#leg b").forEach(el=>{const t=+el.dataset.n,s=performance.now();(function f(n){const q=Math.min((n-s)/1400,1);el.textContent=Math.round(t*(1-(1-q)**3))+"%";if(q<1)requestAnimationFrame(f)})(s)})}
 new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){drawDonut();o.disconnect()}}),{threshold:.35}).observe(dw);
@@ -1035,14 +1426,41 @@ $("#ca2").textContent=$("#ca").textContent;
 
 /* game */
 let n=0,best=0;try{best=+localStorage.getItem("vcbest")||0}catch(e){}
+const hiEl=$("#hi");const paintHi=v=>hiEl.textContent=String(v).padStart(3,"0");paintHi(best);
 const th=[10,30,60,100,150],ms=["Tap to meow","Cops noticed","Helicopters incoming","Roadblocks up","The whole city is chasing you","5 stars. Legend."];
 $("#cat").onclick=e=>{n++;$("#sc").textContent=n;const k=th.filter(t=>n>=t).length;
   $$("#st2 b").forEach((b,i)=>b.classList.toggle("on",i<k));
   const next=th[k]||th[4],prev=th[k-1]||0;$("#meter").style.width=(k>=5?100:(n-prev)/(next-prev)*100)+"%";
-  $("#msg").textContent=ms[k]+(best?` · best ${Math.max(best,n)}`:"");try{if(n>best)localStorage.setItem("vcbest",n)}catch(_){}
+  $("#msg").textContent=ms[k]+(best?` · best ${Math.max(best,n)}`:"");try{if(n>best)localStorage.setItem("vcbest",n)}catch(_){}if(n>best)paintHi(n);
   const c=$("#cat");c.classList.remove("flash");void c.offsetWidth;c.classList.add("flash");
   if(reduce)return;const x=e.clientX||innerWidth/2,y=e.clientY||innerHeight/2;
-  for(let i=0;i<7;i++){const s=document.createElement("span");s.className="paw";s.textContent="🐾";s.style.cssText=`left:${x}px;top:${y}px;--dx:${(Math.random()-.5)*280}px;--dy:${-60-Math.random()*220}px`;document.body.appendChild(s);setTimeout(()=>s.remove(),900)}};
+  for(let i=0;i<7;i++){const s=document.createElement("span");s.className="paw";s.innerHTML=icon("paw");s.style.cssText=`left:${x}px;top:${y}px;--dx:${(Math.random()-.5)*280}px;--dy:${-60-Math.random()*220}px`;document.body.appendChild(s);setTimeout(()=>s.remove(),900)}};
+
+/* animated headings: split words */
+$$(".head h2,.h2").forEach(h=>{if(reduce)return;const walk=n=>{[...n.childNodes].forEach(c=>{if(c.nodeType===3){const f=document.createDocumentFragment();c.textContent.split(/(\s+)/).forEach(w=>{if(!w)return;if(/^\s+$/.test(w)){f.appendChild(document.createTextNode(w));return}const o=document.createElement("span");o.className="sw";const i=document.createElement("span");i.textContent=w;o.appendChild(i);f.appendChild(o)});c.replaceWith(f)}else if(c.nodeType===1&&(c.classList.contains("grad")||c.classList.contains("gradc"))){c.classList.add("flick");const o=document.createElement("span");o.className="sw";c.replaceWith(o);const i=document.createElement("span");i.appendChild(c);o.appendChild(i)}else if(c.nodeType===1)walk(c)})};walk(h);
+  h.querySelectorAll(".sw>span").forEach((s,i)=>s.style.transitionDelay=(i*.08)+"s");
+  const host=h.closest(".head,.hs-head");if(host&&!host.classList.contains("rv"))host.classList.add("rv")});
+$$(".kick").forEach(k=>{const h=k.closest(".head,.hs-head,.cta");if(h&&!h.classList.contains("rv"))h.classList.add("rv")});
+$$(".sep").forEach(s=>s.classList.add("rv","sepr"));
+/* cursor spotlight on cards */
+if(!reduce&&matchMedia("(hover:hover)").matches){$$(".mis,.card").forEach(el=>{if(el.classList.contains("mis"))el.insertAdjacentHTML("beforeend",'<span class="spot"></span>');
+  el.addEventListener("pointermove",e=>{const r=el.getBoundingClientRect();el.style.setProperty("--px",(e.clientX-r.left)+"px");el.style.setProperty("--py",(e.clientY-r.top)+"px")})})}
+/* tactile ripple */
+document.addEventListener("pointerdown",e=>{const b=e.target.closest(".btn");if(!b||reduce)return;const r=b.getBoundingClientRect(),s=document.createElement("span");s.className="rp";s.style.left=(e.clientX-r.left)+"px";s.style.top=(e.clientY-r.top)+"px";b.appendChild(s);setTimeout(()=>s.remove(),650)});
+/* VICE RUSH card: mission-start launch before navigating */
+$$("a.more").forEach(m=>m.addEventListener("click",e=>{if(reduce||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;e.preventDefault();m.classList.add("launch");setTimeout(()=>location.href=m.href,520)}));
+addEventListener("pageshow",()=>$$("a.more").forEach(m=>m.classList.remove("launch")));
+/* chapter select */
+const chaps=$$("#hsbar button"),misEls=$$(".mis");
+chaps.forEach((b,i)=>b.onclick=()=>{const m=misEls[i];if(innerWidth<=760){track.scrollTo({left:m.offsetLeft-(track.clientWidth-m.offsetWidth)/2,behavior:reduce?"auto":"smooth"});return}
+  const dist=track.scrollWidth-innerWidth,X=m.offsetLeft+m.offsetWidth/2-innerWidth/2,q=Math.min(Math.max(X/(dist||1),0),1);
+  scrollTo({top:hs.getBoundingClientRect().top+scrollY+q*(hs.offsetHeight-innerHeight)+2,behavior:reduce?"auto":"smooth"})});
+function curChap(){let c=0;if(innerWidth<=760){const tr=track.getBoundingClientRect();let best=1e9;misEls.forEach((m,i)=>{const r=m.getBoundingClientRect(),d=Math.abs(r.left+r.width/2-(tr.left+tr.width/2));if(d<best){best=d;c=i}})}
+  else{const cx=innerWidth*.5;let best=1e9;misEls.forEach((m,i)=>{const r=m.getBoundingClientRect(),d=Math.abs(r.left+r.width/2-cx);if(d<best){best=d;c=i}})}
+  chaps.forEach((b,i)=>{b.classList.toggle("cur",i===c);b.setAttribute("aria-selected",i===c);if(innerWidth<=760)b.style.setProperty("--p",i<=c?1:0)});misEls.forEach((m,i)=>m.classList.toggle("cur",i===c))}
+track.addEventListener("scroll",curChap,{passive:true});
+/* parallax glows */
+const pars=$$(".glowbg");function runPar(){if(reduce)return;pars.forEach(g=>{const r=g.parentElement.getBoundingClientRect();g.style.transform=`translate3d(0,${(r.top*-.12).toFixed(1)}px,0)`})}
 
 /* reveal */
 const rvs=$$(".rv");
@@ -1059,7 +1477,7 @@ function onScroll(){const y=scrollY,max=document.documentElement.scrollHeight-in
   if(!document.body.classList.contains("menu")){nav.classList.toggle("hide",y>lastY+4&&y>innerHeight);if(y<lastY-4)nav.classList.remove("hide")}lastY=y;
   let cur="hero";secs.forEach(s=>{if(s.getBoundingClientRect().top<innerHeight*.4)cur=s.id});cur=linkFor[cur]||cur;
   $$(".links a").forEach(a=>a.classList.toggle("cur",a.getAttribute("href")==="#"+cur));
-  runHS()}
+  runHS();runPar()}
 addEventListener("scroll",onScroll,{passive:true});
 addEventListener("resize",()=>{sizeHS();runHS()});
 addEventListener("load",()=>{sizeHS();runHS()});
