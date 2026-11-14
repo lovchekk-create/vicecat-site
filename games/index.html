@@ -621,6 +621,10 @@ footer .credits a{color:var(--ink)}
 #vcmis .sweep.f{transition:transform .55s cubic-bezier(.7,0,.3,1);transform:translateX(110%)}
 /* typography */
 #vcmis .radio{position:absolute;z-index:5;left:clamp(18px,5vw,64px);top:calc(11vh + 18px);font:700 11px/1 ui-monospace,Menlo,monospace;letter-spacing:.22em;color:#ff6aa6;opacity:0;transition:opacity .4s}
+#vcmis .vic{width:1em;height:1em;overflow:visible}#vcmis .vic .f{fill:currentColor;stroke:none}#vcmis .vic .a{fill:#ff2e88;stroke:#ff2e88}#vcmis .vic [stroke="none"].a{stroke:none}
+#vcmis .radio .vic{width:18px;height:18px;vertical-align:-5px;margin-right:8px}#vcmis .radio .vic .wv{animation:vcwv 1s infinite}#vcmis .radio .vic .w2{animation-delay:.25s}#vcmis .radio .vic .dial{transform-box:fill-box;transform-origin:center;animation:vcdial 2.4s linear infinite}
+@keyframes vcwv{0%,100%{opacity:.15}40%{opacity:1}}@keyframes vcdial{to{transform:rotate(360deg)}}
+#vcmis .stars b{display:inline-flex}#vcmis .stars b .vic{width:1em;height:1em}#vcmis .stars b.on .vic{filter:drop-shadow(0 0 8px #ff9a4d)}
 #vcmis .radio i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#ff2a4a;margin-right:8px;box-shadow:0 0 10px #ff2a4a;animation:vcblk 1s steps(2) infinite}
 @keyframes vcblk{50%{opacity:.2}}
 #vcmis.s1 .radio{opacity:1}
@@ -701,8 +705,8 @@ footer .credits a{color:var(--ink)}
   <canvas class="static" width="160" height="90"></canvas>
   <div class="siren"></div><div class="vig"></div><div class="grain"></div>
   <div class="bar t"></div><div class="bar b"></div>
-  <div class="radio"><i></i>VCPD DISPATCH · CH 09</div>
-  <div class="stars" aria-hidden="true"><b>★</b><b>★</b><b>★</b><b>★</b><b>★</b></div>
+  <div class="radio"><svg class="vic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.5 6.4 18.6 2.4"/><rect x="3.4" y="6.4" width="17.2" height="13" rx="2.6"/><circle cx="8.6" cy="13" r="3.3"/><circle class="a" cx="8.6" cy="13" r="1.2" stroke="none"/><path d="M14 10.2h3.8" stroke-width="1.5"/><g class="dial"><circle cx="16" cy="15.2" r="1.9" stroke-width="1.3"/><path d="M16 15.2v-1.9" stroke-width="1.3"/></g><g class="waves" stroke-width="1.3"><path class="wv" d="M21.6 9.6c.9 1.1.9 2.7 0 3.8"/><path class="wv w2" d="M23 8.4c1.5 1.8 1.5 4.4 0 6.2"/></g></svg>VCPD DISPATCH · CH 09</div>
+  <div class="stars" aria-hidden="true"><b><svg class="vic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="f" d="M12 2.8l2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 16.6l-5.4 2.9 1.1-6.1-4.5-4.2 6.1-.8z"/></svg></b><b><svg class="vic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="f" d="M12 2.8l2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 16.6l-5.4 2.9 1.1-6.1-4.5-4.2 6.1-.8z"/></svg></b><b><svg class="vic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="f" d="M12 2.8l2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 16.6l-5.4 2.9 1.1-6.1-4.5-4.2 6.1-.8z"/></svg></b><b><svg class="vic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="f" d="M12 2.8l2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 16.6l-5.4 2.9 1.1-6.1-4.5-4.2 6.1-.8z"/></svg></b><b><svg class="vic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="f" d="M12 2.8l2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 16.6l-5.4 2.9 1.1-6.1-4.5-4.2 6.1-.8z"/></svg></b></div>
   <div class="mcard"><div class="num" id="vcNum"></div><h2 class="ttl"><span><b>THE</b></span><span><b>GETAWAY</b></span></h2><div class="rule"></div></div>
   <div class="line" aria-live="polite"><b>LOLA</b><span id="vcLine"></span></div>
   <div class="lower"><small>MISSION 01</small><b>THE GETAWAY</b></div>
