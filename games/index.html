@@ -56,6 +56,9 @@ a{color:inherit}
 button{font:inherit;color:inherit;background:none;border:0}
 ::selection{background:var(--pink);color:#fff}
 @media (pointer:fine){html.has-cursor,html.has-cursor *{cursor:none!important}}
+/* intro + loading screen: keep the normal system cursor until the game has started */
+@media (pointer:fine){html.has-cursor:not(.started),html.has-cursor:not(.started) *{cursor:auto!important}html.has-cursor:not(.started) :is(a,button,[role=button],label){cursor:pointer!important}}
+html:not(.started) #cursor{display:none!important}
 
 /* ========================================================= STAGE (world canvases + fx) */
 #stage{position:fixed;inset:0;z-index:0;overflow:hidden;background:#05020c}
