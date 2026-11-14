@@ -69,10 +69,59 @@ p{margin:0}
 #intro .dest{position:absolute;left:50%;top:15vh;transform:translateX(-50%);text-align:center;opacity:0;transition:opacity 1s,letter-spacing 2.4s cubic-bezier(.2,.8,.2,1);letter-spacing:.9em;white-space:nowrap}
 #intro .dest.on{opacity:1;letter-spacing:.35em}
 #intro .dest b{display:block;font:900 clamp(34px,7vw,92px)/1 Unbounded,sans-serif;letter-spacing:-.03em;margin-top:10px;background:var(--sun);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 6px 30px rgba(255,61,139,.6))}
-#intro .skip{position:absolute;right:clamp(16px,4vw,48px);bottom:clamp(20px,5vh,48px);pointer-events:auto;background:rgba(11,4,32,.45);backdrop-filter:blur(8px);border:0;color:var(--haze);font:600 14px Barlow,sans-serif;padding:10px 18px;border-radius:999px;cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+#intro .skip{pointer-events:auto;background:rgba(11,4,32,.45);backdrop-filter:blur(8px);border:0;color:var(--haze);font:600 14px Barlow,sans-serif;padding:10px 18px;border-radius:999px;cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
 #intro .bars{position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 9vh 0 #000,inset 0 -9vh 0 #000;transition:box-shadow 1s}
 #intro.go .bars{box-shadow:inset 0 0 0 #000,inset 0 0 0 #000}
 #intro .fallback{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 85%,#ff5a7e,#5a1460 40%,#0b0420 75%)}
+
+/* --- VICE CITY ARRIVAL: scenes p1 (black) → p2 (window) → p3 (through the glass) → p4 (logo) --- */
+html.nointro #intro{display:none}
+#intro{background:#030108}
+#intro canvas{opacity:0;transition:opacity 1.6s cubic-bezier(.4,0,.2,1)}
+#intro.p2 canvas{opacity:1}
+#intro .cab{position:absolute;left:50%;top:50%;z-index:2;width:min(34vw,46vh);aspect-ratio:3/4.1;border-radius:46%/36%;transform:translate(-50%,-50%) scale(1);opacity:0;pointer-events:none;
+  box-shadow:0 0 0 200vmax #0a0614,inset 0 0 0 10px #1a1229,inset 0 0 0 14px #2a1f3d,inset 0 0 70px 20px rgba(0,0,0,.75);transition:opacity 1.4s,transform 2.1s cubic-bezier(.75,0,.25,1)}
+#intro .cab::before{content:"";position:absolute;inset:-34px;border-radius:46%/36%;box-shadow:inset 0 0 0 30px #140d22,0 0 0 1px rgba(255,255,255,.04);pointer-events:none}
+#intro .cab::after{content:"";position:absolute;inset:14px;border-radius:46%/36%;background:linear-gradient(115deg,rgba(255,255,255,.1),transparent 30%,transparent 70%,rgba(255,61,139,.08));pointer-events:none}
+#intro.p2 .cab{opacity:1}
+#intro.p3 .cab{transform:translate(-50%,-50%) scale(7.5);opacity:0;transition:opacity 1.2s .7s,transform 2.1s cubic-bezier(.75,0,.25,1)}
+#intro .ifog{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0;transition:opacity 2s;
+  background:radial-gradient(ellipse 80% 40% at 30% 100%,rgba(255,61,139,.28),transparent 70%),radial-gradient(ellipse 70% 35% at 80% 0%,rgba(35,213,213,.14),transparent 70%);animation:ifog 9s ease-in-out infinite alternate}
+@keyframes ifog{to{transform:translate3d(-3%,1%,0) scale(1.06)}}
+#intro.p2 .ifog{opacity:1}
+#intro .igrain{position:absolute;inset:-50%;z-index:6;pointer-events:none;opacity:.09;mix-blend-mode:overlay;animation:igr .9s steps(4) infinite;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+@keyframes igr{25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-1%,-1%)}}
+#intro .ihud{z-index:4}
+#intro .alt{opacity:0;transition:opacity .8s .4s}
+#intro.p2 .alt{opacity:1}
+#intro.p4 .alt,#intro.p4 .dest{opacity:0;transition:opacity .4s}
+#intro .flight{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;opacity:0;transition:opacity 1s,letter-spacing 2.4s cubic-bezier(.2,.8,.2,1),filter 1s;letter-spacing:.5em;white-space:nowrap}
+#intro .flight small{display:block;font:600 11px/1 ui-monospace,Menlo,monospace;letter-spacing:.5em;color:#23d5d5;margin-bottom:14px}
+#intro .flight b{display:block;font:500 clamp(22px,3.4vw,40px)/1 Unbounded,sans-serif;letter-spacing:.32em;color:#f6e9ff;text-indent:.32em}
+#intro .flight span{display:block;margin-top:16px;font:600 11px/1 ui-monospace,Menlo,monospace;letter-spacing:.3em;color:rgba(246,233,255,.55)}
+#intro.p1 .flight{opacity:1;letter-spacing:.2em}
+#intro.p2 .flight{opacity:0;filter:blur(8px)}
+#intro .ilogo{position:absolute;inset:0;z-index:5;display:grid;place-content:center;text-align:center;pointer-events:none}
+#intro .ilogo small{font:600 12px/1 ui-monospace,Menlo,monospace;letter-spacing:.6em;color:#23d5d5;opacity:0;transition:opacity .6s}
+#intro .ilogo b{display:flex;gap:.18em;justify-content:center;margin-top:14px;font:900 clamp(64px,13vw,200px)/.86 Unbounded,sans-serif;letter-spacing:-.05em}
+#intro .ilogo i{font-style:normal;display:block;opacity:0;transform:translateY(40%) scale(1.25);filter:blur(16px);transition:opacity .7s,transform 1s cubic-bezier(.16,1,.3,1),filter .8s}
+#intro .ilogo i:first-child{background:linear-gradient(180deg,#fff,#ffd1ea 45%,#ff2e88);-webkit-background-clip:text;background-clip:text;color:transparent}
+#intro .ilogo i:last-child{color:transparent;-webkit-text-stroke:2px #21e6f2;transition-delay:.12s}
+#intro .ilogo .ln{display:block;height:2px;width:0;margin:22px auto 0;background:linear-gradient(90deg,transparent,#ffd36b,#ff2e88,#21e6f2,transparent);transition:width 1s .25s cubic-bezier(.16,1,.3,1)}
+#intro.p4 .ilogo small{opacity:1}
+#intro.p4 .ilogo i{opacity:1;transform:none;filter:none}
+#intro.p4 .ilogo .ln{width:min(520px,70vw)}
+#intro .ilogo::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 55% 40% at 50% 50%,rgba(10,4,24,.75),transparent 75%);opacity:0;transition:opacity .8s}
+#intro.p4 .ilogo::before{opacity:1}
+#intro .isweep{position:absolute;inset:-20%;z-index:7;pointer-events:none;background:linear-gradient(100deg,transparent 44%,rgba(255,211,107,.0) 46%,rgba(255,240,220,.55) 50%,rgba(255,61,139,.35) 52%,transparent 56%);transform:translateX(-110%);mix-blend-mode:screen}
+#intro.p4 .isweep{transform:translateX(110%);transition:transform 1.1s .2s cubic-bezier(.6,0,.3,1)}
+#intro .ictl{position:absolute;z-index:8;right:clamp(16px,4vw,48px);bottom:clamp(20px,5vh,48px);display:flex;gap:8px}
+#intro .ictl button{pointer-events:auto;background:rgba(11,4,32,.5);backdrop-filter:blur(8px);border:0;color:var(--haze);font:600 13px Barlow,sans-serif;letter-spacing:.06em;padding:11px 18px;border-radius:999px;cursor:pointer;box-shadow:inset 0 0 0 1px rgba(246,233,255,.22);white-space:nowrap}
+#intro .ictl button:hover{background:rgba(255,46,136,.3)}
+#intro .ictl button[aria-pressed="true"]{color:#21e6f2}
+#intro.go{transform:scale(1.25);filter:blur(12px) brightness(1.3)}
+@media (max-width:760px){#intro .cab{width:min(66vw,46vh)}#intro .alt b{font-size:24px}#intro .dest{top:12vh}#intro .ictl{right:12px;bottom:14px}#intro .alt{bottom:16px;left:14px}}
 
 
 /* nav */
@@ -473,14 +522,21 @@ footer small{display:block;color:var(--dim);font-size:13px;line-height:1.6;max-w
 <body>
 <div id="prog"></div>
 
-<div id="intro" aria-label="Flying into Vice City">
+<script>try{if(sessionStorage.getItem("vcIntro")==="1"&&!/[?&]intro\b/.test(location.search))document.documentElement.classList.add("nointro")}catch(e){}</script>
+<div id="intro" role="dialog" aria-label="Intro: arriving in Vice City">
+  <div class="cab" aria-hidden="true"></div>
+  <div class="ifog" aria-hidden="true"></div>
   <div class="ihud">
+    <div class="flight"><small>VICE AIR · NIGHT SERVICE</small><b>FLIGHT 1986</b><span>DESCENDING · NEON COAST</span></div>
     <div class="dest" id="dest">Now approaching<b>VICE CITY</b></div>
     <div class="alt">ALTITUDE<b id="altv">35,000 FT</b></div>
   </div>
+  <div class="ilogo" aria-hidden="true"><small>WELCOME TO</small><b><i>VICE</i><i>CAT</i></b><span class="ln"></span></div>
+  <div class="igrain" aria-hidden="true"></div>
   <div class="bars"></div>
+  <div class="isweep" aria-hidden="true"></div>
   <div class="flash"></div>
-  <button class="skip" id="skip">Skip</button>
+  <div class="ictl"><button id="isnd" type="button" aria-pressed="false">♪ Sound off</button><button class="skip" id="skip" type="button" aria-label="Skip intro">Skip ▸▸</button></div>
 </div>
 
 <nav id="nav" aria-label="Main">
@@ -649,7 +705,7 @@ footer small{display:block;color:var(--dim);font-size:13px;line-height:1.6;max-w
   <div class="wrap">
     <div class="fw">
       <a class="logo" href="#hero"><span class="mk" aria-hidden="true">😼</span>$VICECAT</a>
-      <nav aria-label="Footer"><a href="#story">Story</a><a href="#crew">The Crew</a><a href="#map">City Map</a><a href="#play">Games</a><a href="#token">Tokenomics</a><a href="#buy">How to buy</a></nav>
+      <nav aria-label="Footer"><a href="#story">Story</a><a href="#crew">The Crew</a><a href="#map">City Map</a><a href="#play">Games</a><a href="#token">Tokenomics</a><a href="#buy">How to buy</a><a href="#" data-replay>↺ Replay intro</a></nav>
     </div>
     <small>$VICECAT is a meme coin with no intrinsic value and no promise of returns. Crypto is volatile and you can lose everything. This is not financial advice. This fan project is not affiliated with any game studio or publisher.</small>
   </div>
@@ -674,15 +730,37 @@ $("#sel").innerHTML=crew.map((c,i)=>`<button class="cc" role="tab" data-k="${i}"
 $$("[data-bg]").forEach(e=>e.style.backgroundImage=`url(${IMG[e.dataset.bg]})`);
 $$("img[data-i]").forEach(e=>e.src=IMG[e.dataset.i]);
 
-/* intro: flight over Vice City */
-let entered=false;
-function enter(){if(entered)return;entered=true;const it=$("#intro");if(!it)return;it.classList.add("go");document.body.classList.add("live");setTimeout(()=>{it.remove();window.__flyStop&&window.__flyStop()},1300)}
-$("#skip").onclick=enter;
-addEventListener("keydown",e=>{if((e.key==="Enter"||e.key==="Escape"||e.key===" ")&&$("#intro"))enter()});
-function flyFallback(){$("#intro").insertAdjacentHTML("afterbegin",'<div class="fallback"></div>');$("#dest").classList.add("on");setTimeout(enter,1600)}
+/* intro: VICE CITY ARRIVAL — plays once per browser session (add ?intro to the URL or use "Replay intro" to see it again) */
+let entered=false;const introT0=performance.now(),iEl=$("#intro");
+const forceIntro=/[?&]intro\b/.test(location.search);
+let seen=false;try{seen=sessionStorage.getItem("vcIntro")==="1"}catch(e){}
+/* ambience: original WebAudio synthesis, opt-in, never required */
+const IA={ctx:null,bus:null,nodes:[],on:false};
+function iaStart(){try{IA.ctx=IA.ctx||new(window.AudioContext||window.webkitAudioContext)();IA.ctx.resume()}catch(e){return}const c=IA.ctx,t=c.currentTime;
+  IA.bus=c.createGain();IA.bus.gain.setValueAtTime(.0001,t);IA.bus.gain.exponentialRampToValueAtTime(.6,t+1.2);IA.bus.connect(c.destination);
+  const len=c.sampleRate*3,b=c.createBuffer(1,len,c.sampleRate),d=b.getChannelData(0);let last=0;for(let i=0;i<len;i++){const w=Math.random()*2-1;last=(last+.02*w)/1.02;d[i]=last*3.2}
+  const n=c.createBufferSource();n.buffer=b;n.loop=true;const lp=c.createBiquadFilter();lp.type="lowpass";lp.frequency.value=520;const ng=c.createGain();ng.gain.value=.55;n.connect(lp);lp.connect(ng);ng.connect(IA.bus);n.start();
+  const o=c.createOscillator();o.type="sine";o.frequency.value=88;const og=c.createGain();og.gain.value=.05;const l=c.createOscillator();l.frequency.value=.35;const lg=c.createGain();lg.gain.value=3;l.connect(lg);lg.connect(o.frequency);o.connect(og);og.connect(IA.bus);o.start();l.start();
+  IA.nodes=[n,o,l];IA.lp=lp}
+function iaWhoosh(){const c=IA.ctx;if(!IA.on||!c)return;const t=c.currentTime;IA.lp.frequency.cancelScheduledValues(t);IA.lp.frequency.setValueAtTime(520,t);IA.lp.frequency.exponentialRampToValueAtTime(2400,t+1.3);IA.lp.frequency.exponentialRampToValueAtTime(700,t+2.6)}
+function iaChord(){const c=IA.ctx;if(!IA.on||!c)return;const t=c.currentTime;[220,277.2,329.6,440,554.4].forEach((f,i)=>{const o=c.createOscillator(),g=c.createGain(),fl=c.createBiquadFilter();o.type="sawtooth";o.frequency.value=f;o.detune.value=(i%2?7:-7);fl.type="lowpass";fl.frequency.setValueAtTime(300,t);fl.frequency.exponentialRampToValueAtTime(2600,t+.8);
+  g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.035,t+.25);g.gain.exponentialRampToValueAtTime(.0001,t+2.2);o.connect(fl);fl.connect(g);g.connect(IA.bus);o.start(t);o.stop(t+2.3)})}
+function iaStop(){const c=IA.ctx;if(!c||!IA.bus)return;IA.bus.gain.setTargetAtTime(.0001,c.currentTime,.35);const ns=IA.nodes;setTimeout(()=>ns.forEach(x=>{try{x.stop()}catch(e){}}),2200);IA.nodes=[]}
+const isnd=$("#isnd");
+if(isnd)isnd.onclick=e=>{e.stopPropagation();IA.on=!IA.on;isnd.setAttribute("aria-pressed",IA.on);isnd.textContent=IA.on?"♪ Sound on":"♪ Sound off";try{sessionStorage.setItem("vcSnd",IA.on?"1":"0")}catch(_){}if(IA.on)iaStart();else iaStop()};
+function enter(){if(entered)return;entered=true;try{sessionStorage.setItem("vcIntro","1")}catch(e){}const it=$("#intro");iaStop();
+  if(!it){document.body.classList.add("live");return}it.classList.add("go");document.body.classList.add("live");setTimeout(()=>{it.remove();window.__flyStop&&window.__flyStop()},1300)}
+let finaled=false;
+function finale(){if(finaled||entered)return;finaled=true;iEl.classList.add("p4");iaChord();setTimeout(enter,reduce?900:1250)}
+if(iEl&&seen&&!forceIntro){entered=true;iEl.remove();document.documentElement.classList.remove("nointro");document.body.classList.add("live")}
+else if(iEl){document.documentElement.classList.remove("nointro");iEl.classList.add("p1")}
+$("#skip")&&($("#skip").onclick=e=>{e.stopPropagation();enter()});
+addEventListener("keydown",e=>{if((e.key==="Enter"||e.key==="Escape"||e.key===" ")&&$("#intro")&&!entered&&!(e.target.closest&&e.target.closest("#intro button"))){e.preventDefault();enter()}});
+$$("[data-replay]").forEach(b=>b.addEventListener("click",e=>{e.preventDefault();try{sessionStorage.removeItem("vcIntro")}catch(_){}location.href=location.pathname+"?intro"}));
+function flyFallback(){if(!$("#intro"))return;$("#intro").insertAdjacentHTML("afterbegin",'<div class="fallback"></div>');iEl.classList.add("p2","p3");$("#dest").classList.add("on");setTimeout(finale,1400)}
 let flown=false;
 function fly(){
-  if(flown)return;flown=true;
+  if(flown||entered||!$("#intro"))return;flown=true;
   if(reduce){flyFallback();return}
   const cv=document.createElement("canvas"),box=$("#intro");
   const gl=cv.getContext("webgl2",{antialias:true,alpha:false,powerPreference:"high-performance"});
@@ -840,11 +918,11 @@ function fly(){
   const bez=(p0,p1,p2,p3,t)=>{const m=1-t;return[0,1,2].map(i=>m*m*m*p0[i]+3*m*m*t*p1[i]+3*m*t*t*p2[i]+t*t*t*p3[i])};
   const P0=V(-300,3700,6200),P1=V(150,2300,3600),P2=V(40,760,1500),P3=V(0,240,-100),L0=V(0,-900,-5200),L3=V(0,300,-7000);
   const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
-  const DUR=5600,altEl=$("#altv"),dest=$("#dest");let t0=null,raf,stopped=false;
+  const DUR=4700,DELAY=Math.max(0,1400-(performance.now()-introT0)),altEl=$("#altv"),dest=$("#dest");let t0=null,raf,stopped=false;
   window.__flyStop=()=>{stopped=true;cancelAnimationFrame(raf)};
   gl.enable(gl.DEPTH_TEST);
   function frame(ts){
-    if(stopped)return;if(t0===null)t0=ts;const FT=new URLSearchParams(location.search).get("flyt");const t=FT!==null?+FT:Math.min((ts-t0)/DUR,1),e=ease(t);
+    if(stopped)return;if(t0===null)t0=ts+DELAY;if(ts>=t0&&!iEl.classList.contains("p2"))iEl.classList.add("p2");const FT=new URLSearchParams(location.search).get("flyt");const t=FT!==null?+FT:Math.min(Math.max(ts-t0,0)/DUR,1),e=ease(t);
     const eye=bez(P0,P1,P2,P3,e),look=lerp3(L0,L3,e);
     const f=nrm(sub(look,eye)),roll=Math.sin(e*Math.PI)*.10,wu=[Math.sin(roll),Math.cos(roll),0];
     const r=nrm(cross(f,wu)),u=cross(r,f);
@@ -865,15 +943,15 @@ function fly(){
     gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);gl.bindVertexArray(vaoCl);gl.uniform1f(U(pP,"k"),cv.height/900);gl.uniform1f(U(pP,"soft"),1);gl.drawArrays(gl.POINTS,0,CL.length/3);
     gl.depthMask(true);gl.disable(gl.BLEND);
     altEl.textContent=Math.max(0,Math.round(eye[1]*8.2)).toLocaleString("en-US")+" FT";
-    if(t>.3)dest.classList.add("on");
-    if(t>=.93&&!entered&&FT===null)enter();
+    if(t>.1&&!iEl.classList.contains("p3")){iEl.classList.add("p3");iaWhoosh()}
+    if(t>.32)dest.classList.add("on");
+    if(t>=.9&&!entered&&FT===null)finale();
     raf=requestAnimationFrame(frame);
   }
   try{raf=requestAnimationFrame(frame)}catch(e){flyFallback()}
 }
 function safeFly(){try{fly()}catch(e){console.warn(e);flyFallback()}}
-addEventListener("load",()=>setTimeout(safeFly,100));
-if(document.readyState==="complete")setTimeout(safeFly,100);
+if($("#intro"))setTimeout(safeFly,60);
 
 
 /* synthwave loop */
