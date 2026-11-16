@@ -55,7 +55,7 @@ img{display:block;max-width:100%}
 .hud>*{pointer-events:auto}
 .hud.tl{top:18px;left:var(--pad);display:flex;align-items:center;gap:16px}
 .hud.tr{top:16px;right:var(--pad);display:flex;flex-direction:column;align-items:flex-end;gap:6px}
-.hud.bl{left:var(--pad);bottom:22px}
+.hud.tc{top:14px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:10px;max-width:calc(100vw - 2*var(--pad) - 360px)}.chip.ca{gap:8px;padding:0 6px 0 14px;height:42px}.chip.ca .k{color:var(--pink)}.chip.ca code{font:600 12px var(--mono);letter-spacing:.04em;text-transform:none;max-width:30ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.chip.ca button{height:30px;padding:0 14px;border-radius:999px;background:var(--sun);color:#1a0618;font:800 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;cursor:pointer;border:0}.chip.xl{text-decoration:none;color:inherit}@media(max-width:900px){.hud.tc{top:64px;left:var(--pad);right:var(--pad);transform:none;max-width:none;flex-wrap:wrap}.chip.ca code{max-width:18ch}}.hero .ca{max-width:560px}.hud.bl{left:var(--pad);bottom:22px}
 .hud.br{right:var(--pad);bottom:22px;display:flex;gap:10px}
 .brand{font-size:34px;transform:skew(-6deg);display:block;filter:drop-shadow(0 2px 0 rgba(0,0,0,.4))}
 .stars{display:flex;gap:4px}
@@ -411,6 +411,7 @@ img{display:block;max-width:100%}
 
 <!-- HUD -->
 <div class="hud tl"><a href="#top" class="brand dsp sun">Vice Cat</a></div>
+<div class="hud tc" id="topbar"><a class="chip xl" href="https://x.com/VICECAT6" target="_blank" rel="noopener" aria-label="X / Twitter"><b>&#120143;</b><span class="t">@VICECAT6</span></a><div class="chip ca"><span class="k">CA</span><code id="caTop">DBgrgtsR24X7U83dHgBGbjQEBPnZpsMXw3T4UUpdpump</code><button type="button" id="cpTop">Copy</button></div></div>
 <div class="hud tr">
   <div class="stars" id="stars" aria-label="Wanted level"></div>
   <div class="cash" id="cash">$0</div>
@@ -451,7 +452,7 @@ img{display:block;max-width:100%}
     <h1 class="dsp"><span class="ln"><span class="sun">Vice</span></span><span class="ln"><span>Cat</span></span></h1>
     <div class="sub">
       <p>One cat. Nine lives. A city that never learned to sleep. <b>$VICECAT</b> is his calling card — on Solana.</p>
-      <div class="cta"><a class="btn p" href="#token"><span>Buy $VICECAT</span></a><a class="btn g" href="#game"><span>▶ Rooftop run</span></a></div>
+      <div class="cta"><a class="btn p" href="https://pump.fun/coin/DBgrgtsR24X7U83dHgBGbjQEBPnZpsMXw3T4UUpdpump" target="_blank" rel="noopener"><span>Buy $VICECAT</span></a><a class="btn g" href="#game"><span>▶ Rooftop run</span></a><a class="btn g" href="https://x.com/VICECAT6" target="_blank" rel="noopener"><span>&#120143; Twitter</span></a></div><div class="ca"><span class="mono" style="color:var(--mute)">CA</span><code id="caHero">DBgrgtsR24X7U83dHgBGbjQEBPnZpsMXw3T4UUpdpump</code><button class="btn p sm" type="button" id="cpHero"><span>Copy</span></button></div>
     </div>
   </div>
 </section>
@@ -552,7 +553,7 @@ img{display:block;max-width:100%}
         <div class="tile"><small class="mono">Supply</small><b id="supply">1B</b></div>
         <div class="tile"><small class="mono">Tax</small><b>0 / 0</b></div>
       </div>
-      <div class="ca"><span class="mono" style="color:var(--mute)">CA</span><code id="ca">PASTE_CONTRACT_ADDRESS_HERE</code><button class="btn p sm" id="cp"><span>Copy</span></button></div>
+      <div class="ca"><span class="mono" style="color:var(--mute)">CA</span><code id="ca">DBgrgtsR24X7U83dHgBGbjQEBPnZpsMXw3T4UUpdpump</code><button class="btn p sm" id="cp"><span>Copy</span></button></div>
       <p class="note mono">Placeholder figures · final numbers at launch</p>
     </div>
     <div class="ph-stage rv">
@@ -583,7 +584,7 @@ img{display:block;max-width:100%}
             <button class="pstep"><i>4</i><div><b>Swap</b><span>Paste the CA, double-check it, swap for $VICECAT.</span></div></button>
             <p class="note mono">Tap a step to tick it off</p></div></div>
           <div class="ph-app" data-app="ca"><header><button data-back aria-label="Back">‹</button><h4>Contract</h4></header><div class="sc">
-            <div class="pcard"><small>$VICECAT · Solana</small><code id="ca2">PASTE_CONTRACT_ADDRESS_HERE</code><button class="pbtn" id="cp2">Copy address</button></div>
+            <div class="pcard"><small>$VICECAT · Solana</small><code id="ca2">DBgrgtsR24X7U83dHgBGbjQEBPnZpsMXw3T4UUpdpump</code><button class="pbtn" id="cp2">Copy address</button></div>
             <p class="note mono" style="text-transform:none;letter-spacing:.04em">Always check the address against the official X account before you swap. Anyone can launch a copycat.</p></div></div>
           <div class="ph-app" data-app="chart"><header><button data-back aria-label="Back">‹</button><h4>Chart</h4></header><div class="sc">
             <div class="chartbox"><svg viewBox="0 0 300 150" preserveAspectRatio="none"><path d="M0 120 L40 110 L80 116 L120 90 L160 96 L200 70 L240 76 L300 40"/></svg><b>Chart drops<br><span class="sun">at launch</span></b></div>
@@ -976,5 +977,6 @@ setInterval(()=>{if(vel>0){vel*=.5;if(vel<1)speed.style.opacity=0}},120);
 $$('a[href^="#"]').forEach(a=>a.addEventListener("click",e=>{const id=a.getAttribute("href");if(id.length<2)return;const t=document.querySelector(id);if(!t)return;e.preventDefault();scrollTo({top:t.getBoundingClientRect().top+scrollY,behavior:reduce?"auto":"smooth"})}));
 })();
 </script>
+<script>(function(){var re=/^[1-9A-HJ-NP-Za-km-z]{32,44}$/;function t(m){var e=document.getElementById("toast");if(!e)return;e.textContent=m;e.classList.add("on");clearTimeout(e._t);e._t=setTimeout(function(){e.classList.remove("on")},2000)}function cp(id){return function(){var a=(document.getElementById(id).textContent||"").trim();if(!re.test(a)){t("Contract drops at launch");return}try{navigator.clipboard.writeText(a).then(function(){t("Contract copied")},function(){t("Select & copy the address")})}catch(e){t("Select & copy the address")}}}[["cpTop","caTop"],["cpHero","caHero"]].forEach(function(p){var b=document.getElementById(p[0]);if(b)b.onclick=cp(p[1])})})();</script>
 </body>
 </html>
